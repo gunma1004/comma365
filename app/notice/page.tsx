@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: '쉼표의 상담 접수 시간, 통화 확인 항목, 예약금/선입금 없는 100% 현장 후불제 및 카드 결제 안내입니다.',
   keywords: ['쉼표 공지사항', '마사지 이용안내', '후불 정산', '현장 카드결제', '스웨디시 안내'],
   alternates: {
-    canonical: 'https://comma.netlify.app/notice/',
+    canonical: 'https://comma26.netlify.appnotice/',
   },
 };
 

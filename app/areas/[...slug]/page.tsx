@@ -91,7 +91,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { current } = result;
   const targetName = current.fullName;
   const shortName = current.name;
-  const pageUrl = `https://comma.netlify.app/areas/${slug.join('/')}/`;
+  const pageUrl = `https://comma26.netlify.appareas/${slug.join('/')}/`;
 
   const metaTitle = `${targetName} 출장마사지 | 쉼표 24시 홈타이·스웨디시`;
   const metaDescription = `${targetName} 전 지역 30분 내 빠른 도착! 쉼표 ${shortName} 출장마사지, 홈타이, 힐링 스웨디시 코스 및 100% 현장 후불 결제 안내입니다.`;

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: '주소 확인부터 실시간 상담, 도착 후 100% 현장 결제까지 쉼표 마사지 & 테라피 이용 방법을 상세히 안내합니다.',
   keywords: ['쉼표 이용안내', '출장마사지 이용방법', '홈타이 예약방법', '스웨디시 이용방법', '현장결제'],
   alternates: {
-    canonical: 'https://comma.netlify.app/guide/',
+    canonical: 'https://comma26.netlify.appguide/',
   },
 };
 

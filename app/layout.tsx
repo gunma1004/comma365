@@ -3,7 +3,7 @@ import Link from 'next/link';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://comma.netlify.app'),
+  metadataBase: new URL(''https://comma26.netlify.app'),
   title: {
     template: '%s | 쉼표',
     default: '쉼표 - 전국 24시 프리미엄 스웨디시 & 홈케어 테라피',
