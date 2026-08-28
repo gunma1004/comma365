@@ -2,17 +2,34 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import './globals.css';
 
+const siteTitle = '쉼표 - 전국 24시 프리미엄 스웨디시 & 홈케어 테라피';
+const siteDescription =
+  '선입금 없는 100% 현장 후불제! 서울, 경기, 인천, 대전, 대구, 부산 등 전국 11개 권역 30분 내 신속 방문 스웨디시 & 힐링 케어.';
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://comma26.netlify.app'),
   title: {
     template: '%s | 쉼표',
-    default: '쉼표 - 전국 24시 프리미엄 스웨디시 & 홈케어 테라피',
+    default: siteTitle,
   },
-  description: '선입금 없는 100% 현장 후불제! 서울, 경기, 인천, 대전, 대구, 부산 등 전국 11개 권역 30분 내 신속 방문 스웨디시 & 힐링 케어.',
+  description: siteDescription,
   verification: {
     other: {
       'naver-site-verification': '4bf40448775a7cfa672b627330c0ff56f2b95f36',
     },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'ko_KR',
+    url: 'https://comma26.netlify.app/',
+    siteName: '쉼표',
+    title: siteTitle,
+    description: siteDescription,
+  },
+  twitter: {
+    card: 'summary',
+    title: siteTitle,
+    description: siteDescription,
   },
 };
 
