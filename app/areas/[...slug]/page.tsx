@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { REGION_DATA, getRegionBySlug, RegionItem } from '../../../data/regions';
+import { REGION_DATA, type RegionItem } from '../../../data/regions';
 
 interface Props {
   params: Promise<{
@@ -9,7 +9,40 @@ interface Props {
   }>;
 }
 
-// 1. 모든 동/구/시 경로 정적 페이지 사전 생성 (SSG)
+// 1. 슬러그 경로로 지역 데이터를 안전하게 탐색하는 헬퍼 함수
+function findRegionBySlug(slugs: string[]) {
+  if (!slugs || slugs.length === 0) return null;
+
+  let currentList: RegionItem[] = REGION_DATA;
+  let currentTarget: RegionItem | null = null;
+  const breadcrumbs: { id: string; name: string }[] = [];
+
+  for (let i = 0; i < slugs.length; i++) {
+    const slug = slugs[i];
+    const found = currentList.find((item) => item.id === slug);
+
+    if (!found) {
+      return null;
+    }
+
+    currentTarget = found;
+
+    if (i < slugs.length - 1) {
+      breadcrumbs.push({ id: found.id, name: found.name });
+      currentList = found.children || [];
+    }
+  }
+
+  if (!currentTarget) return null;
+
+  return {
+    current: currentTarget,
+    breadcrumbs,
+    children: currentTarget.children || [],
+  };
+}
+
+// 2. 모든 동/구/시 경로 정적 페이지 사전 생성 (SSG)
 export async function generateStaticParams() {
   const paths: { slug: string[] }[] = [];
 
@@ -27,10 +60,10 @@ export async function generateStaticParams() {
   return paths;
 }
 
-// 2. 검색엔진 최적화(SEO) 및 네이버 Open Graph 메타데이터 생성
+// 3. 검색엔진 최적화(SEO) 및 네이버 Open Graph 메타데이터 생성
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const result = getRegionBySlug(slug);
+  const result = findRegionBySlug(slug);
 
   if (!result) return {};
 
@@ -39,7 +72,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const shortName = current.name;
   const pageUrl = `https://comma26.netlify.app/areas/${slug.join('/')}/`;
 
-  // 레이아웃의 template(%s | 쉼표)과 결합되므로 타이틀 끝 '쉼표' 중복을 방지합니다.
   const metaTitle = `${targetName} 출장마사지 24시 홈타이·스웨디시`;
   const metaDescription = `${targetName} 전 지역 30분 내 빠른 도착! 쉼표 ${shortName} 출장마사지, 홈타이, 힐링 스웨디시 코스 및 100% 현장 후불 결제 안내입니다.`;
 
@@ -68,10 +100,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-// 3. 지역 페이지 본문 렌더링
+// 4. 지역 페이지 본문 렌더링
 export default async function RegionPage({ params }: Props) {
   const { slug } = await params;
-  const result = getRegionBySlug(slug);
+  const result = findRegionBySlug(slug);
 
   if (!result) {
     notFound();
@@ -158,7 +190,7 @@ export default async function RegionPage({ params }: Props) {
           </section>
         )}
 
-        {/* 4. 최하위 동(동 단위) 도착 완료 안내 박스 (말단 노드일 경우) */}
+        {/* 4. 최하위 동(말단 노드) 방문 서비스 안내 박스 */}
         {isLeaf && (
           <section className="safety-banner" style={{ marginBottom: '40px', background: '#fff', border: '1px solid #f2d5dc' }}>
             <div className="safety-text">
