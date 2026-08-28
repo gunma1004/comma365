@@ -1,87 +1,33 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { REGION_DATA, type RegionItem } from '../../../data/regions';
+import Link from 'next/link';
+import { REGION_DATA, getRegionBySlug, RegionItem } from '../../../data/regions';
 
 interface Props {
-  params: Promise<{ slug: string[] }>;
+  params: Promise<{
+    slug: string[];
+  }>;
 }
 
-interface Shop {
-  id: number;
-  name: string;
-  phone: string;
-  tag: string;
-  desc?: string;
-  isAd?: boolean;
-}
+// 1. 모든 동/구/시 경로 정적 페이지 사전 생성 (SSG)
+export async function generateStaticParams() {
+  const paths: { slug: string[] }[] = [];
 
-// 1. 기본 5개 업체 (서울, 경기, 인천, 천안 등)
-const DEFAULT_SHOPS: Shop[] = [
-  { id: 1, name: '한국미인테라피', phone: '0507-1280-3303', tag: '스웨디시 · 홈타이', desc: '프리미엄 힐링 케어 및 전원 전문 테라피스트' },
-  { id: 2, name: '미인클럽테라피', phone: '0507-1280-3193', tag: '감성 스웨디시 · 아로마', desc: '지친 일상에 활력을 주는 프라이빗 맞춤 코스' },
-  { id: 3, name: '오늘밤테라피', phone: '0507-1280-3223', tag: '24시 스웨디시 · 안마', desc: '야간 24시간 언제든 편안하게 이용하는 힐링 스파' },
-  { id: 4, name: '한국골든테라피', phone: '0507-1280-3361', tag: 'VIP 스웨디시 · 힐링', desc: '최상의 퀄리티와 안락함을 선사하는 최고급 테라피' },
-  { id: 5, name: '퀸즈홈테라피', phone: '0507-1280-3334', tag: '프리미엄 24시 방문케어', desc: '철저한 위생 관리와 품격 있는 고품격 힐링 서비스' },
-];
-
-// 2. 아산 전용 업체 (2개)
-const ASAN_SHOPS: Shop[] = [
-  { id: 1, name: '한국미인테라피', phone: '0507-1280-3303', tag: '스웨디시 · 로미로미', desc: '아산 전 지역 빠른 방문 및 프리미엄 맞춤 케어' },
-  { id: 2, name: '미인클럽테라피', phone: '0507-1280-3193', tag: '감성 스웨디시 · 아로마', desc: '온양·배방·탕정 등 아산 전역 힐링 테라피' },
-];
-
-// 3. 대전 전용 업체 (1개)
-const DAEJEON_SHOPS: Shop[] = [
-  { id: 1, name: 'S슬림테라피', phone: '0507-1280-3358', tag: '대전 24시 감성 스웨디시', desc: '대전 서구·유성구 등 전역 30분 내 빠른 방문 힐링 케어' },
-];
-
-// 4. 대구, 구미, 포항, 부산, 제주 전용 (제휴문의)
-const PARTNER_SHOPS: Shop[] = [
-  { id: 1, name: '쉼표 공식 제휴점 모집', phone: '0507-1280-3344', tag: '실시간 입점 및 제휴 문의', desc: '해당 지역 최고의 광고 효과와 빠른 콜 유입을 지원합니다.', isAd: true },
-];
-
-// 지역별 업체 목록 가져오기 함수
-function getShopsForRegion(rootRegionId: string): Shop[] {
-  switch (rootRegionId) {
-    case 'asan':
-      return [...ASAN_SHOPS].sort(() => Math.random() - 0.5);
-    case 'daejeon':
-      return DAEJEON_SHOPS;
-    case 'daegu':
-    case 'gumi':
-    case 'pohang':
-    case 'busan':
-    case 'jeju':
-      return PARTNER_SHOPS;
-    case 'seoul':
-    case 'gyeonggi':
-    case 'incheon':
-    case 'cheonan':
-    default:
-      return [...DEFAULT_SHOPS].sort(() => Math.random() - 0.5);
-  }
-}
-
-function getRegionBySlug(slugs: string[]): {
-  current: RegionItem;
-  breadcrumbs: RegionItem[];
-  rootId: string;
-} | null {
-  let currentLevel: RegionItem[] | undefined = REGION_DATA;
-  const breadcrumbs: RegionItem[] = [];
-  let found: RegionItem | undefined;
-
-  for (const slug of slugs) {
-    found = currentLevel?.find((item) => item.id === slug);
-    if (!found) return null;
-    breadcrumbs.push(found);
-    currentLevel = found.children;
+  function traverse(items: RegionItem[], currentPath: string[] = []) {
+    for (const item of items) {
+      const nextPath = [...currentPath, item.id];
+      paths.push({ slug: nextPath });
+      if (item.children && item.children.length > 0) {
+        traverse(item.children, nextPath);
+      }
+    }
   }
 
-  return found ? { current: found, breadcrumbs, rootId: slugs[0] } : null;
+  traverse(REGION_DATA);
+  return paths;
 }
 
+// 2. 검색엔진 최적화(SEO) 및 네이버 Open Graph 메타데이터 생성
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const result = getRegionBySlug(slug);
@@ -93,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const shortName = current.name;
   const pageUrl = `https://comma26.netlify.app/areas/${slug.join('/')}/`;
 
-  // 레이아웃 템플릿(%s | 쉼표)과 자동 결합되므로 여기서는 '쉼표' 접미사를 제외합니다.
+  // 레이아웃의 template(%s | 쉼표)과 결합되므로 타이틀 끝 '쉼표' 중복을 방지합니다.
   const metaTitle = `${targetName} 출장마사지 24시 홈타이·스웨디시`;
   const metaDescription = `${targetName} 전 지역 30분 내 빠른 도착! 쉼표 ${shortName} 출장마사지, 홈타이, 힐링 스웨디시 코스 및 100% 현장 후불 결제 안내입니다.`;
 
@@ -122,25 +68,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export async function generateStaticParams() {
-  const paths: { slug: string[] }[] = [];
-
-  function collectPaths(items: RegionItem[], accumulated: string[] = []) {
-    for (const item of items) {
-      const currentPath = [...accumulated, item.id];
-      paths.push({ slug: currentPath });
-
-      if (item.children && item.children.length > 0) {
-        collectPaths(item.children, currentPath);
-      }
-    }
-  }
-
-  collectPaths(REGION_DATA);
-  return paths;
-}
-
-export default async function AreaCatchAllPage({ params }: Props) {
+// 3. 지역 페이지 본문 렌더링
+export default async function RegionPage({ params }: Props) {
   const { slug } = await params;
   const result = getRegionBySlug(slug);
 
@@ -148,135 +77,142 @@ export default async function AreaCatchAllPage({ params }: Props) {
     notFound();
   }
 
-  const { current, breadcrumbs, rootId } = result;
-  const currentPathString = slug.join('/');
-  const hasChildren = current.children && current.children.length > 0;
-
-  // 지역 규칙에 따른 업체 목록 추출
-  const regionShops = getShopsForRegion(rootId);
-  const isPartnerPage = ['daegu', 'gumi', 'pohang', 'busan', 'jeju'].includes(rootId);
+  const { current, breadcrumbs, children } = result;
+  const isLeaf = !children || children.length === 0;
 
   return (
-    <main className="t4-areas-page">
+    <main className="t4-directory-page">
+      {/* 1. 상단 메인 이미지 배너 */}
+      <section className="custom-banner-section">
+        <div className="page-width">
+          <div className="custom-banner-link">
+            <img
+              src="/main-banner.jpg"
+              alt={`${current.fullName} 출장마사지 쉼표`}
+              className="custom-banner-img"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 2. 지역 정보 히어로 섹션 */}
       <header className="t4-directory-hero">
         <div className="page-width t4-directory-hero-inner">
-          <nav aria-label="경로 탐색" style={{ marginBottom: '12px', fontSize: '14px', opacity: 0.85 }}>
-            <Link href="/" style={{ color: 'inherit', textDecoration: 'none' }}>홈</Link>
-            <span style={{ margin: '0 8px' }}>&gt;</span>
-            <Link href="/" style={{ color: 'inherit', textDecoration: 'none' }}>지역 안내</Link>
-            {breadcrumbs.map((crumb, idx) => {
-              const crumbPath = slug.slice(0, idx + 1).join('/');
-              const isLast = idx === breadcrumbs.length - 1;
-              return (
-                <span key={crumb.id}>
-                  <span style={{ margin: '0 8px' }}>&gt;</span>
-                  {isLast ? (
-                    <strong>{crumb.name}</strong>
-                  ) : (
-                    <Link href={`/areas/${crumbPath}/`} style={{ color: 'inherit', textDecoration: 'none' }}>
-                      {crumb.name}
-                    </Link>
-                  )}
-                </span>
-              );
-            })}
+          {/* 브레드크럼 네비게이션 */}
+          <nav className="t4-breadcrumbs" aria-label="경로 안내" style={{ marginBottom: '12px', fontSize: '13px', color: '#666' }}>
+            <Link href="/" style={{ color: 'var(--primary)', fontWeight: 700 }}>홈</Link>
+            {breadcrumbs.map((b, idx) => (
+              <span key={idx} style={{ margin: '0 6px' }}>
+                &gt; <Link href={`/areas/${breadcrumbs.slice(0, idx + 1).map(x => x.id).join('/')}/`}>{b.name}</Link>
+              </span>
+            ))}
+            <span style={{ margin: '0 6px', fontWeight: 800, color: '#111' }}>&gt; {current.name}</span>
           </nav>
 
-          <p>COMMA · {current.name.toUpperCase()} MASSAGE</p>
+          <p>REGION THERAPY GUIDE · COMMA</p>
           <h1>{current.fullName} 출장마사지</h1>
-          <span>{current.fullName} 인근 계신 곳 어디든 30분 내 방문하는 프라이빗 힐링 서비스</span>
+          <span>
+            {current.fullName} 전 지역 30분 내 신속 방문 테라피 안내 · 100% 현장 후불 결제
+          </span>
 
           <div className="t4-directory-stats">
-            <div><span>선택 지역</span><strong>{current.name}</strong></div>
-            <div><span>운영 상태</span><strong>24시간 접수</strong></div>
-            <div><span>결제 방식</span><strong>100% 현장 후불</strong></div>
+            <div><span>방문 시간</span><strong>평균 30분 내</strong></div>
+            <div><span>정산 방식</span><strong>100% 현장 후불</strong></div>
+            <div><span>이용 형태</span><strong>자택·호텔·원룸</strong></div>
           </div>
         </div>
       </header>
 
-      {/* 상단 업체 / 제휴문의 섹션 */}
-      <section className="page-width t4-directory-section" style={{ paddingBottom: '10px' }}>
-        <header className="section-head">
-          <div>
-            <span className="section-kicker">{isPartnerPage ? 'PARTNER INQUIRY' : 'VERIFIED SHOPS'}</span>
-            <h2>{current.name} {isPartnerPage ? '제휴 및 광고 문의' : '출장마사지 추천 제휴점'}</h2>
-          </div>
-        </header>
-
-        <div className="shop-grid">
-          {regionShops.map((shop, index) => (
-            <div key={shop.id} className="shop-card" style={shop.isAd ? { border: '2px dashed #d52656', background: '#fff9fa' } : {}}>
-              <div className="shop-badge">
-                {shop.isAd ? '입점 모집중' : `추천 ${index + 1}위`}
+      <div className="page-width" style={{ padding: '40px 20px 60px' }}>
+        {/* 3. 하위 구/동 선택 그리드 (하위 지역이 있는 경우) */}
+        {!isLeaf && (
+          <section className="t4-directory-section" style={{ padding: '0 0 40px' }}>
+            <div className="section-head-flex">
+              <div>
+                <span className="section-kicker">SUB DISTRICTS</span>
+                <h2 className="section-title">{current.name} 세부 지역 안내</h2>
+                <p className="section-subtitle">원하시는 동·읍·면을 선택하시면 해당 지역 출장마사지 정보를 확인하실 수 있습니다.</p>
               </div>
-              <div className="shop-info">
-                <h3>{shop.isAd ? `${current.name} ${shop.name}` : `${current.name} ${shop.name}`}</h3>
-                <span className="shop-tag">{shop.tag}</span>
-                {shop.desc && <p>{shop.desc}</p>}
-              </div>
-              <a href={`tel:${shop.phone.replace(/-/g, '')}`} className="shop-call-btn">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style={{ marginRight: '6px' }}>
-                  <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.24 1.02l-2.21 2.2z"/>
-                </svg>
-                {shop.phone} {shop.isAd ? '제휴 문의' : '전화예약'}
-              </a>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* 하위 지역 목록 또는 최하위 상세 안내 */}
-      {hasChildren ? (
-        <section className="page-width t4-directory-section">
-          <header className="section-head">
-            <div>
-              <span className="section-kicker">SUB DIRECTORY</span>
-              <h2>{current.name} 세부 지역 목록</h2>
+            <div className="region-grid-v2">
+              {children.map((child, idx) => (
+                <Link
+                  key={child.id}
+                  href={`/areas/${[...slug, child.id].join('/')}/`}
+                  className="region-card-v2"
+                >
+                  <div className="region-card-head">
+                    <span className="region-step-num">NO. {idx + 1}</span>
+                    <span className="region-count-badge">즉시 방문 가능</span>
+                  </div>
+                  <h3 className="region-card-title">{child.name} 출장마사지</h3>
+                  <p className="region-card-sub">{current.name} {child.name} 전 지역 20~30분 신속 배차</p>
+                  <div className="region-card-btn">
+                    <span>상세 안내 보기</span>
+                    <b>→</b>
+                  </div>
+                </Link>
+              ))}
             </div>
-          </header>
+          </section>
+        )}
 
-          <div className="t4-directory-grid">
-            {current.children!.map((child, index) => (
-              <Link
-                key={child.id}
-                href={`/areas/${currentPathString}/${child.id}/`}
-                className="t4-directory-card"
-              >
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <div>
-                  <h2>{child.name}</h2>
-                  <p>{child.fullName} 출장마사지</p>
-                </div>
-                <b>다음 단계 →</b>
-              </Link>
-            ))}
-          </div>
-        </section>
-      ) : (
-        <section className="page-width t4-directory-section">
-          <header className="section-head">
-            <div>
-              <span className="section-kicker">SERVICE GUIDE</span>
-              <h2>{current.fullName} 출장마사지 이용 안내</h2>
+        {/* 4. 최하위 동(동 단위) 도착 완료 안내 박스 (말단 노드일 경우) */}
+        {isLeaf && (
+          <section className="safety-banner" style={{ marginBottom: '40px', background: '#fff', border: '1px solid #f2d5dc' }}>
+            <div className="safety-text">
+              <h3>📍 {current.fullName} 전 지역 방문 서비스 운영 중</h3>
+              <p>{current.fullName} 내 아파트, 오피스텔, 원룸, 호텔, 모텔 등 어디서든 24시간 안심하고 이용하실 수 있습니다.</p>
             </div>
-          </header>
+            <Link href="/pricing" className="btn-primary" style={{ padding: '10px 20px', borderRadius: '8px' }}>
+              코스별 가격 확인 →
+            </Link>
+          </section>
+        )}
 
-          <div style={{ background: '#ffffff', padding: '32px', borderRadius: '16px', border: '1px solid #eee', marginTop: '20px', lineHeight: '1.8' }}>
-            <h3 style={{ fontSize: '20px', marginBottom: '16px', color: '#d52656' }}>
-              {current.name} 24시간 프라이빗 방문 케어
-            </h3>
-            <p style={{ marginBottom: '16px', color: '#444' }}>
-              쉼표 <strong>{current.fullName} 출장마사지</strong>는 원하시는 자택, 오피스텔, 호텔 등
-              계신 곳 어디서나 편안하게 받으실 수 있도록 엄선된 관리사가 신속히 찾아갑니다.
+        {/* 5. 안심 이용 수칙 & 통화 전 안내 */}
+        <section className="notice-bottom-grid">
+          <div className="contact-panel">
+            <span className="section-kicker">SAFETY POLICY</span>
+            <h3>선입금 없는 100% 현장 정산 안내</h3>
+            <p>
+              쉼표는 일체의 예약금이나 유류비를 사전에 요구하지 않습니다. {current.name} 전 지역 관리사 도착 후 직접 확인하신 뒤 안전하게 결제해 주세요.
             </p>
-            <ul style={{ listStyle: 'disc', paddingLeft: '20px', color: '#555' }}>
-              <li><strong>선입금 일체 없음:</strong> 100% 현장 도착 후 결제</li>
-              <li>{current.name} 전 지역 접수 후 20~30분 내 도착</li>
-              <li>타이, 아로마, 힐링 감성 스웨디시 맞춤 관리</li>
-            </ul>
+            <div className="contact-btn-row">
+              <Link href="/pricing" className="btn-primary">
+                가격표 보기
+              </Link>
+              <Link href="/guide" className="btn-secondary">
+                이용 안내
+              </Link>
+            </div>
           </div>
+
+          <aside className="step-panel">
+            <span className="section-kicker">BEFORE YOU CALL</span>
+            <h3>{current.name} 예약 시 전달 사항</h3>
+            <ol className="step-list">
+              <li>
+                <b>01</b>
+                <span>{current.name} 내 정확한 도로명 주소 또는 건물명</span>
+              </li>
+              <li>
+                <b>02</b>
+                <span>이용 희망 일자 및 시각</span>
+              </li>
+              <li>
+                <b>03</b>
+                <span>선택하신 코스 및 이용 시간</span>
+              </li>
+              <li>
+                <b>04</b>
+                <span>결제 방식 (현금 또는 카드)</span>
+              </li>
+            </ol>
+          </aside>
         </section>
-      )}
+      </div>
     </main>
   );
 }
