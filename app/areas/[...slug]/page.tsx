@@ -9,6 +9,60 @@ interface Props {
   }>;
 }
 
+// 5개 공식 인증 추천 제휴 업체 데이터
+const FEATURED_SHOPS = [
+  { 
+    id: 1, 
+    name: '한국미인테라피', 
+    phone: '0507-1280-3303', 
+    tag: '스웨디시 · 로미로미', 
+    desc: '전원 20대 전문 테라피스트 · 피로회복 맞춤 힐링', 
+    rating: '4.9', 
+    reviews: 142,
+    highlight: '인기 1위'
+  },
+  { 
+    id: 2, 
+    name: '미인클럽테라피', 
+    phone: '0507-1280-3193', 
+    tag: '감성 스웨디시 · 아로마', 
+    desc: '지친 일상에 활력을 주는 프라이빗 감성 케어', 
+    rating: '4.9', 
+    reviews: 128,
+    highlight: '재방문율 98%'
+  },
+  { 
+    id: 3, 
+    name: '오늘밤테라피', 
+    phone: '0507-1280-3223', 
+    tag: '24시 스웨디시 · 타이', 
+    desc: '야간 24시간 언제든 계신 곳 30분 내 방문 도착', 
+    rating: '4.8', 
+    reviews: 95,
+    highlight: '24H 즉시배차'
+  },
+  { 
+    id: 4, 
+    name: '한국골든테라피', 
+    phone: '0507-1280-3361', 
+    tag: 'VIP 스웨디시 · 딥티슈', 
+    desc: '최상의 퀄리티와 품격 있는 최고급 프리미엄 테라피', 
+    rating: '5.0', 
+    reviews: 110,
+    highlight: '고객 만족 1위'
+  },
+  { 
+    id: 5, 
+    name: '퀸즈홈테라피', 
+    phone: '0507-1280-3334', 
+    tag: '프리미엄 힐링 홈케어', 
+    desc: '철저한 위생 관리와 품격 높은 프라이빗 힐링 코스', 
+    rating: '4.9', 
+    reviews: 86,
+    highlight: '철저한 위생관리'
+  },
+];
+
 // 1. 슬러그 경로로 지역 데이터를 안전하게 탐색하는 헬퍼 함수
 function findRegionBySlug(slugs: string[]) {
   if (!slugs || slugs.length === 0) return null;
@@ -130,7 +184,6 @@ export default async function RegionPage({ params }: Props) {
       {/* 2. 지역 정보 히어로 섹션 */}
       <header className="t4-directory-hero">
         <div className="page-width t4-directory-hero-inner">
-          {/* 브레드크럼 네비게이션 */}
           <nav className="t4-breadcrumbs" aria-label="경로 안내" style={{ marginBottom: '12px', fontSize: '13px', color: '#666' }}>
             <Link href="/" style={{ color: 'var(--primary)', fontWeight: 700 }}>홈</Link>
             {breadcrumbs.map((b, idx) => (
@@ -156,7 +209,52 @@ export default async function RegionPage({ params }: Props) {
       </header>
 
       <div className="page-width" style={{ padding: '40px 20px 60px' }}>
-        {/* 3. 하위 구/동 선택 그리드 (하위 지역이 있는 경우) */}
+        {/* 3. 추천 제휴 업체 5개 섹션 */}
+        <section id="featured-shops" className="t4-directory-section" style={{ padding: '0 0 40px' }}>
+          <div className="section-head-flex">
+            <div>
+              <span className="section-kicker">VERIFIED PREMIUM SHOPS</span>
+              <h2 className="section-title">{current.name} 추천 제휴점</h2>
+              <p className="section-subtitle">{current.fullName} 전 지역 신속 배차 가능한 고객 만족도 4.9점 이상 공식 인증점입니다.</p>
+            </div>
+            <span className="badge-live-order">실시간 배차 가능</span>
+          </div>
+
+          <div className="shop-grid-enhanced">
+            {FEATURED_SHOPS.map((shop, index) => (
+              <article key={shop.id} className="shop-card-v2">
+                <div className="shop-card-top">
+                  <span className="shop-rank-badge">BEST {index + 1}</span>
+                  <span className="shop-highlight-badge">{shop.highlight}</span>
+                </div>
+
+                <div className="shop-card-main">
+                  <h3 className="shop-card-name">{shop.name}</h3>
+                  <div className="shop-rating-row">
+                    <span className="star-rating">★ {shop.rating}</span>
+                    <span className="review-count">({shop.reviews}+ 이용후기)</span>
+                  </div>
+                  <span className="shop-category-tag">{shop.tag}</span>
+                  <p className="shop-card-desc">{shop.desc}</p>
+                </div>
+
+                <div className="shop-card-footer">
+                  <div className="shop-price-info">
+                    <span className="status-open"><span className="pulse-dot-green"></span> 24시간 즉시 상담</span>
+                  </div>
+                  <a href={`tel:${shop.phone.replace(/-/g, '')}`} className="btn-shop-action">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style={{ marginRight: '6px' }}>
+                      <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.24 1.02l-2.21 2.2z"/>
+                    </svg>
+                    <strong>{shop.phone}</strong> 바로연결
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* 4. 하위 구/동 선택 그리드 (하위 지역이 있는 경우) */}
         {!isLeaf && (
           <section className="t4-directory-section" style={{ padding: '0 0 40px' }}>
             <div className="section-head-flex">
@@ -190,7 +288,7 @@ export default async function RegionPage({ params }: Props) {
           </section>
         )}
 
-        {/* 4. 최하위 동(말단 노드) 방문 서비스 안내 박스 */}
+        {/* 5. 최하위 동(말단 노드) 방문 서비스 안내 박스 */}
         {isLeaf && (
           <section className="safety-banner" style={{ marginBottom: '40px', background: '#fff', border: '1px solid #f2d5dc' }}>
             <div className="safety-text">
@@ -203,7 +301,7 @@ export default async function RegionPage({ params }: Props) {
           </section>
         )}
 
-        {/* 5. 안심 이용 수칙 & 통화 전 안내 */}
+        {/* 6. 안심 이용 수칙 & 통화 전 안내 */}
         <section className="notice-bottom-grid">
           <div className="contact-panel">
             <span className="section-kicker">SAFETY POLICY</span>
