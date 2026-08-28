@@ -9,6 +9,11 @@ export const metadata: Metadata = {
     default: '쉼표 - 전국 24시 프리미엄 스웨디시 & 홈케어 테라피',
   },
   description: '선입금 없는 100% 현장 후불제! 서울, 경기, 인천, 대전, 대구, 부산 등 전국 11개 권역 30분 내 신속 방문 스웨디시 & 힐링 케어.',
+  verification: {
+    other: {
+      'naver-site-verification': '4bf40448775a7cfa672b627330c0ff56f2b95f36',
+    },
+  },
 };
 
 export default function RootLayout({
