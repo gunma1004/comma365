@@ -2,15 +2,13 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import './globals.css';
 
-// 메인 최상위 영역: '출장마사지' 키워드를 배제하고 프리미엄 방문 홈케어/테라피로 순화
 const siteTitle = '쉼표 - 전국 24시 프리미엄 1:1 방문 홈케어 & 힐링 테라피';
 const siteDescription =
-  '선입금 없는 100% 현장 후불제! 서울, 경기, 인천, 대전, 대구, 부산 등 전국 주요 권역 신속 방문 프라이빗 바디케어 & 릴렉싱 힐링 테라피.';
+  '100% 현장 후불제! 서울·경기·인천·대전·부산 등 전국 24시 신속 방문 1:1 프라이빗 바디 테라피.';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://comma26.netlify.app'),
   title: {
-    // 하위 지역/구/동 페이지에서 넘겨준 제목(예: "서울 강남구 역삼동 출장 1:1 홈케어 마사지 | 쉼표")이 템플릿에 맞게 조합됩니다.
     template: '%s | 쉼표',
     default: siteTitle,
   },
@@ -70,7 +68,7 @@ export default function RootLayout({
             </div>
           </header>
 
-          {/* 본문 콘텐츠 (각 세부 페이지에서 '지역 출장 [완화키워드] 마사지' 렌더링) */}
+          {/* 본문 콘텐츠 */}
           {children}
 
           {/* 공통 푸터 */}
