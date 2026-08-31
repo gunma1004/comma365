@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: '가격 안내 | 6대 테라피 코스 & 정찰제 금액표',
   description: '타이, 전신아로마, VIP 감성힐링, 스페셜, VIP 통합코스, 한국인 스웨디시 투명 공개 가격표와 100% 현장 후불 결제 안내입니다.',
-  keywords: ['쉼표 가격표', '출장마사지 가격', '스웨디시 가격', '홈타이 코스 금액', '현장 후불제'],
+  keywords: ['쉼표 가격표', '마사지가격', '스웨디시 가격', '홈타이 코스 금액', '현장 후불제'],
   alternates: {
     canonical: 'https://comma26.netlify.apppricing/',
   },

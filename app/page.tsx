@@ -20,7 +20,7 @@ const INITIAL_SHOPS: Shop[] = [
     name: '한국미인테라피', 
     phone: '0507-1280-3303', 
     tag: '스웨디시 · 로미로미', 
-    desc: '전원 20대 전문 테라피스트 · 피로회복 맞춤 힐링', 
+    desc: '전문 테라피스트의 섬세한 터칭 · 피로회복 1:1 맞춤 힐링', 
     rating: '4.9', 
     reviews: 142,
     highlight: '인기 1위'
@@ -30,7 +30,7 @@ const INITIAL_SHOPS: Shop[] = [
     name: '미인클럽테라피', 
     phone: '0507-1280-3193', 
     tag: '감성 스웨디시 · 아로마', 
-    desc: '지친 일상에 활력을 주는 프라이빗 감성 케어', 
+    desc: '지친 일상에 활력을 주는 프라이빗 방문 감성 케어', 
     rating: '4.9', 
     reviews: 128,
     highlight: '재방문율 98%'
@@ -39,18 +39,18 @@ const INITIAL_SHOPS: Shop[] = [
     id: 3, 
     name: '오늘밤테라피', 
     phone: '0507-1280-3223', 
-    tag: '24시 스웨디시 · 타이', 
-    desc: '야간 24시간 언제든 계신 곳 30분 내 방문 도착', 
+    tag: '24시 스웨디시 · 릴렉싱', 
+    desc: '24시간 언제든 고객님이 계신 편안한 공간으로 신속 방문', 
     rating: '4.8', 
     reviews: 95,
-    highlight: '24H 즉시배차'
+    highlight: '24H 신속매칭'
   },
   { 
     id: 4, 
     name: '한국골든테라피', 
     phone: '0507-1280-3361', 
     tag: 'VIP 스웨디시 · 딥티슈', 
-    desc: '최상의 퀄리티와 품격 있는 최고급 프리미엄 테라피', 
+    desc: '최상의 퀄리티와 품격 있는 프라이빗 바디 테라피', 
     rating: '5.0', 
     reviews: 110,
     highlight: '고객 만족 1위'
@@ -60,7 +60,7 @@ const INITIAL_SHOPS: Shop[] = [
     name: '퀸즈홈테라피', 
     phone: '0507-1280-3334', 
     tag: '프리미엄 힐링 홈케어', 
-    desc: '철저한 위생 관리와 품격 높은 프라이빗 힐링 코스', 
+    desc: '철저한 위생 관리와 품격 높은 1:1 릴렉싱 코스', 
     rating: '4.9', 
     reviews: 86,
     highlight: '철저한 위생관리'
@@ -69,12 +69,12 @@ const INITIAL_SHOPS: Shop[] = [
 
 const REGIONS = [
   { id: 'seoul', name: '서울특별시', sub: '강남 · 서초 · 송파 · 마포 등', count: '25개 구 전역', step: '01' },
-  { id: 'incheon', name: '인천광역시', sub: '부평 · 구월 · 송도 · 청라 등', count: '전역 30분 배차', step: '02' },
+  { id: 'incheon', name: '인천광역시', sub: '부평 · 구월 · 송도 · 청라 등', count: '전역 30분 매칭', step: '02' },
   { id: 'gyeonggi', name: '경기도', sub: '수원 · 성남(분당) · 일산 · 화성 등', count: '31개 시·군', step: '03' },
   { id: 'cheonan', name: '천안시', sub: '두정동 · 불당동 · 쌍용동 등', count: '서북구 · 동남구', step: '04' },
   { id: 'asan', name: '아산시', sub: '배방 · 탕정 · 온천동 · 용화동 등', count: '아산 전역 방문', step: '05' },
   { id: 'daejeon', name: '대전광역시', sub: '둔산동 · 봉명동 · 유성구 등', count: '5개 구 전역', step: '06' },
-  { id: 'daegu', name: '대구광역시', sub: '동성로 · 수성구 · 달서구 등', count: '대구 전역 배차', step: '07' },
+  { id: 'daegu', name: '대구광역시', sub: '동성로 · 수성구 · 달서구 등', count: '대구 전역 매칭', step: '07' },
   { id: 'gumi', name: '구미시', sub: '인동 · 진평 · 원평 · 송정 등', count: '구미 전역 방문', step: '08' },
   { id: 'pohang', name: '포항시', sub: '이동 · 양덕 · 영일대 · 효자 등', count: '남구 · 북구', step: '09' },
   { id: 'busan', name: '부산광역시', sub: '해운대 · 서면 · 광안리 · 동래 등', count: '16개 구·군', step: '10' },
@@ -101,7 +101,7 @@ export default function HomePage() {
           <a href="#region-directory" className="custom-banner-link">
             <img
               src="/main-banner.jpg"
-              alt="쉼표 전국 24시 프리미엄 스웨디시 & 테라피"
+              alt="쉼표 전국 24시 프리미엄 1:1 방문 홈케어 & 테라피"
               className="custom-banner-img"
             />
           </a>
@@ -113,8 +113,8 @@ export default function HomePage() {
         <div className="section-head-flex">
           <div>
             <span className="section-kicker">VERIFIED PREMIUM SHOPS</span>
-            <h2 className="section-title">쉼표 공식 인증 베스트 제휴점</h2>
-            <p className="section-subtitle">고객 만족도 4.9점 이상, 검증된 테라피스트만 엄선하여 안내합니다.</p>
+            <h2 className="section-title">쉼표 공식 인증 베스트 제휴 테라피</h2>
+            <p className="section-subtitle">고객 만족도 4.9점 이상, 검증된 전문 관리사만 엄선하여 안내합니다.</p>
           </div>
           <span className="badge-live-order">실시간 추천 순위</span>
         </div>
@@ -158,8 +158,8 @@ export default function HomePage() {
         <div className="section-head-flex">
           <div>
             <span className="section-kicker">REGION DIRECTORY</span>
-            <h2 className="section-title">전국 11개 주요 권역 바로가기</h2>
-            <p className="section-subtitle">희망하시는 지역을 선택하시면 세부 동 단위 제휴점 및 안내를 확인하실 수 있습니다.</p>
+            <h2 className="section-title">전국 11개 주요 권역 홈케어 안내</h2>
+            <p className="section-subtitle">희망하시는 지역을 선택하시면 세부 구·동별 맞춤 케어 정보와 제휴점을 확인하실 수 있습니다.</p>
           </div>
         </div>
 
@@ -173,7 +173,7 @@ export default function HomePage() {
               <h3 className="region-card-title">{region.name}</h3>
               <p className="region-card-sub">{region.sub}</p>
               <div className="region-card-btn">
-                <span>세부 동/구 선택하기</span>
+                <span>세부 지역별 케어 보기</span>
                 <b>→</b>
               </div>
             </Link>

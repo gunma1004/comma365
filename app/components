@@ -11,18 +11,48 @@ interface Shop {
 }
 
 const INITIAL_SHOPS: Shop[] = [
-  { id: 1, name: '한국미인테라피', phone: '0507-1280-3303', tag: '스웨디시 · 로미로미', desc: '프리미엄 힐링 케어 및 전원 20대 전문 테라피스트' },
-  { id: 2, name: '미인클럽테라피', phone: '0507-1280-3193', tag: '감성 스웨디시 · 아로마', desc: '지친 일상에 활력을 주는 프라이빗 맞춤 코스' },
-  { id: 3, name: '오늘밤테라피', phone: '0507-1280-3223', tag: '24시 스웨디시 · 타이', desc: '야간 24시간 언제든 편안하게 이용하는 힐링 스파' },
-  { id: 4, name: '한국골든테라피', phone: '0507-1280-3361', tag: 'VIP 스웨디시 · 딥티슈', desc: '최상의 퀄리티와 안락함을 선사하는 최고급 테라피' },
-  { id: 5, name: '퀸즈홈테라피', phone: '0507-1280-3334', tag: '프리미엄 힐링 홈케어', desc: '철저한 위생 관리와 품격 있는 고품격 힐링 서비스' },
+  { 
+    id: 1, 
+    name: '한국미인테라피', 
+    phone: '0507-1280-3303', 
+    tag: '스웨디시 · 로미로미', 
+    desc: '전문 테라피스트의 1:1 맞춤형 힐링 바디케어' 
+  },
+  { 
+    id: 2, 
+    name: '미인클럽테라피', 
+    phone: '0507-1280-3193', 
+    tag: '감성 스웨디시 · 아로마', 
+    desc: '지친 일상에 활력을 불어넣는 프라이빗 감성 테라피' 
+  },
+  { 
+    id: 3, 
+    name: '오늘밤테라피', 
+    phone: '0507-1280-3223', 
+    tag: '24시 스웨디시 · 릴렉싱', 
+    desc: '24시간 언제든 편안한 나만의 공간으로 신속 방문' 
+  },
+  { 
+    id: 4, 
+    name: '한국골든테라피', 
+    phone: '0507-1280-3361', 
+    tag: 'VIP 스웨디시 · 딥티슈', 
+    desc: '최상의 퀄리티와 품격을 갖춘 최고급 바디 릴렉싱' 
+  },
+  { 
+    id: 5, 
+    name: '퀸즈홈테라피', 
+    phone: '0507-1280-3334', 
+    tag: '프리미엄 방문 홈케어', 
+    desc: '철저한 위생 관리와 품격 있는 1:1 맞춤 힐링 서비스' 
+  },
 ];
 
 export default function FeaturedShops({ regionName }: { regionName?: string }) {
   const [shops, setShops] = useState<Shop[]>(INITIAL_SHOPS);
 
   useEffect(() => {
-    // 새로고침 시 무작위(랜덤)로 순서 섞기 (Fisher-Yates Shuffle)
+    // 새로고침 시 무작위 순서 셔플 (Fisher-Yates)
     const shuffled = [...INITIAL_SHOPS];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -33,22 +63,29 @@ export default function FeaturedShops({ regionName }: { regionName?: string }) {
 
   return (
     <div className="shop-grid">
-      {shops.map((shop, index) => (
-        <div key={shop.id} className="shop-card">
-          <div className="shop-badge">추천 {index + 1}위</div>
-          <div className="shop-info">
-            <h3>{regionName ? `${regionName} ` : ''}{shop.name}</h3>
-            <span className="shop-tag">{shop.tag}</span>
-            {shop.desc && <p>{shop.desc}</p>}
+      {shops.map((shop, index) => {
+        // 지역명이 넘어올 경우: [지역] 출장 홈케어 마사지 제휴 형태 표기
+        const displayTitle = regionName
+          ? `${regionName} 출장 홈케어 · ${shop.name}`
+          : shop.name;
+
+        return (
+          <div key={shop.id} className="shop-card">
+            <div className="shop-badge">추천 {index + 1}위</div>
+            <div className="shop-info">
+              <h3>{displayTitle}</h3>
+              <span className="shop-tag">{shop.tag}</span>
+              {shop.desc && <p>{shop.desc}</p>}
+            </div>
+            <a href={`tel:${shop.phone.replace(/-/g, '')}`} className="shop-call-btn">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style={{ marginRight: '6px' }}>
+                <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.24 1.02l-2.21 2.2z"/>
+              </svg>
+              {shop.phone} 바로연결
+            </a>
           </div>
-          <a href={`tel:${shop.phone.replace(/-/g, '')}`} className="shop-call-btn">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style={{ marginRight: '6px' }}>
-              <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.24 1.02l-2.21 2.2z"/>
-            </svg>
-            {shop.phone} 바로연결
-          </a>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

@@ -9,14 +9,14 @@ interface Props {
   }>;
 }
 
-// 5개 공식 인증 추천 제휴 업체 데이터
-const FEATURED_SHOPS = [
+// 기본 추천 제휴 업체 데이터 (수도권 등 기본 지역용)
+const DEFAULT_SHOPS = [
   { 
     id: 1, 
     name: '한국미인테라피', 
     phone: '0507-1280-3303', 
     tag: '스웨디시 · 로미로미', 
-    desc: '전원 20대 전문 테라피스트 · 피로회복 맞춤 힐링', 
+    desc: '전문 테라피스트의 섬세한 터칭 · 피로회복 1:1 맞춤 힐링', 
     rating: '4.9', 
     reviews: 142,
     highlight: '인기 1위'
@@ -26,7 +26,7 @@ const FEATURED_SHOPS = [
     name: '미인클럽테라피', 
     phone: '0507-1280-3193', 
     tag: '감성 스웨디시 · 아로마', 
-    desc: '지친 일상에 활력을 주는 프라이빗 감성 케어', 
+    desc: '지친 일상에 활력을 주는 프라이빗 방문 감성 케어', 
     rating: '4.9', 
     reviews: 128,
     highlight: '재방문율 98%'
@@ -35,18 +35,18 @@ const FEATURED_SHOPS = [
     id: 3, 
     name: '오늘밤테라피', 
     phone: '0507-1280-3223', 
-    tag: '24시 스웨디시 · 타이', 
-    desc: '야간 24시간 언제든 계신 곳 30분 내 방문 도착', 
+    tag: '24시 스웨디시 · 릴렉싱', 
+    desc: '24시간 언제든 고객님이 계신 편안한 공간으로 신속 방문', 
     rating: '4.8', 
     reviews: 95,
-    highlight: '24H 즉시배차'
+    highlight: '24H 신속매칭'
   },
   { 
     id: 4, 
     name: '한국골든테라피', 
     phone: '0507-1280-3361', 
     tag: 'VIP 스웨디시 · 딥티슈', 
-    desc: '최상의 퀄리티와 품격 있는 최고급 프리미엄 테라피', 
+    desc: '최상의 퀄리티와 품격 있는 프라이빗 바디 테라피', 
     rating: '5.0', 
     reviews: 110,
     highlight: '고객 만족 1위'
@@ -56,14 +56,214 @@ const FEATURED_SHOPS = [
     name: '퀸즈홈테라피', 
     phone: '0507-1280-3334', 
     tag: '프리미엄 힐링 홈케어', 
-    desc: '철저한 위생 관리와 품격 높은 프라이빗 힐링 코스', 
+    desc: '철저한 위생 관리와 품격 높은 1:1 릴렉싱 코스', 
     rating: '4.9', 
     reviews: 86,
     highlight: '철저한 위생관리'
   },
 ];
 
-// 1. 슬러그 경로로 지역 데이터를 안전하게 탐색하는 헬퍼 함수
+// 대전 전용 업체
+const DAEJEON_SHOPS = [
+  {
+    id: 101,
+    name: 'S슬림홈타이',
+    phone: '0507-1280-3342',
+    tag: '24시 프리미엄 홈타이 · 스웨디시',
+    desc: '대전 전 지역 신속 방문 · 1:1 맞춤 프라이빗 바디 힐링 케어',
+    rating: '5.0',
+    reviews: 156,
+    highlight: '대전 단독 공식 제휴점',
+  },
+];
+
+// 대구/구미/포항/부산/제주 전용 제휴문의 업체
+const AFFILIATE_INQUIRY_SHOPS = [
+  {
+    id: 201,
+    name: '제휴문의',
+    phone: '0507-1280-3344',
+    tag: '24시 입점 및 제휴 상담',
+    desc: '해당 지역 최고의 프리미엄 테라피 파트너 제휴 입점 문의를 받습니다.',
+    rating: '5.0',
+    reviews: 99,
+    highlight: '공식 제휴 문의',
+  },
+];
+
+// 지역 슬러그에 따라 노출할 제휴점 결정 함수
+function getShopsForRegion(slugs: string[]) {
+  const rootSlug = slugs[0];
+
+  // 1. 대전 권역
+  if (rootSlug === 'daejeon') {
+    return DAEJEON_SHOPS;
+  }
+
+  // 2. 대구, 구미, 포항, 부산, 제주 권역
+  if (['daegu', 'gumi', 'pohang', 'busan', 'jeju'].includes(rootSlug)) {
+    return AFFILIATE_INQUIRY_SHOPS;
+  }
+
+  // 3. 그 외 기본 수도권 등 지역
+  return DEFAULT_SHOPS;
+}
+
+// 20가지 우회 템플릿 생성기
+function getSeoTemplate(targetName: string, shortName: string, slugSeed: string) {
+  const templates = [
+    {
+      title: `${targetName} 출장 1:1 방문 홈케어 마사지 & 테라피`,
+      desc: `${targetName} 전 지역 30분 내 빠른 방문! 쉼표 ${shortName} 출장 맞춤 홈케어 마사지, 힐링 스웨디시 코스 및 100% 현장 후불 결제 안내입니다.`,
+      h1Sub: '출장 1:1 방문 홈케어 마사지',
+      heroSub: '1:1 방문 홈케어 테라피',
+      tagSuffix: '출장 홈케어 마사지',
+    },
+    {
+      title: `${targetName} 출장 100% 안심 건전 힐링 테라피 마사지`,
+      desc: `${targetName} 출장 100% 건전 힐링 타이 & 스웨디시 마사지. 쉼표 ${shortName}의 품격 있는 바디 릴렉싱 케어를 안심 후불제로 이용하세요.`,
+      h1Sub: '출장 안심 건전 힐링 마사지',
+      heroSub: '안심 건전 힐링 테라피',
+      tagSuffix: '출장 건전 마사지',
+    },
+    {
+      title: `${targetName} 출장 상체 림프 순환 케어 마사지`,
+      desc: `${targetName} 출장 상체 림프 순환 및 바디 릴렉싱 마사지. 쉼표 ${shortName} 전문 관리사가 뭉친 근육을 부드럽게 이완해 드립니다.`,
+      h1Sub: '출장 상체 림프 순환 마사지',
+      heroSub: '상체 림프 순환 & 바디 케어',
+      tagSuffix: '출장 림프 마사지',
+    },
+    {
+      title: `${targetName} 출장 프리미엄 아로마 오일 테라피 마사지`,
+      desc: `${targetName} 출장 24시 프리미엄 아로마 오일 마사지. 쉼표 ${shortName}에서 은은한 향기와 함께 하루의 피로를 편안히 풀어보세요.`,
+      h1Sub: '출장 프리미엄 아로마 마사지',
+      heroSub: '프리미엄 천연 아로마 힐링',
+      tagSuffix: '출장 아로마 마사지',
+    },
+    {
+      title: `${targetName} 출장 프라이빗 스웨디시 감성 힐링 마사지`,
+      desc: `${targetName} 출장 감성 스웨디시 힐링 마사지 전문. 쉼표 ${shortName}의 섬세하고 부드러운 1:1 터칭으로 깊은 휴식을 선사합니다.`,
+      h1Sub: '출장 프라이빗 스웨디시 마사지',
+      heroSub: '프라이빗 스웨디시 감성 테라피',
+      tagSuffix: '출장 스웨디시 마사지',
+    },
+    {
+      title: `${targetName} 출장 전신 릴렉싱 바디 케어 마사지`,
+      desc: `${targetName} 출장 전신 맞춤 릴렉스 케어 마사지. 쉼표 ${shortName} 고객님이 계신 편안한 공간으로 찾아가는 1:1 맞춤 솔루션.`,
+      h1Sub: '출장 전신 릴렉싱 마사지',
+      heroSub: '전신 릴렉싱 바디 솔루션',
+      tagSuffix: '출장 릴렉싱 마사지',
+    },
+    {
+      title: `${targetName} 출장 정통 홈타이 힐링 바디 테라피 마사지`,
+      desc: `${targetName} 출장 정통 홈타이 테라피 마사지 안내. 쉼표 ${shortName}의 시원한 스트레칭과 압 조절로 지친 몸의 컨디션을 회복하세요.`,
+      h1Sub: '출장 정통 홈타이 마사지',
+      heroSub: '정통 홈타이 스트레칭 케어',
+      tagSuffix: '출장 홈타이 마사지',
+    },
+    {
+      title: `${targetName} 출장 맞춤 림프 드레나쥐 테라피 마사지`,
+      desc: `${targetName} 출장 림프 드레나쥐 및 전신 순환 마사지. 쉼표 ${shortName} 프라이빗 맞춤 케어로 붓기와 찌든 피로를 완화해 드립니다.`,
+      h1Sub: '출장 림프 드레나쥐 마사지',
+      heroSub: '맞춤 림프 순환 드레나쥐',
+      tagSuffix: '출장 드레나쥐 마사지',
+    },
+    {
+      title: `${targetName} 출장 24시 야간 힐링 홈케어 마사지`,
+      desc: `${targetName} 출장 24시간 언제든 편하게 부르는 야간 홈케어 마사지. 쉼표 ${shortName}에서 늦은 밤에도 부담 없이 관리받으세요.`,
+      h1Sub: '출장 24시 야간 홈케어 마사지',
+      heroSub: '24시 야간 신속 방문 힐링',
+      tagSuffix: '출장 야간 마사지',
+    },
+    {
+      title: `${targetName} 출장 VIP 프리미엄 1:1 방문 테라피 마사지`,
+      desc: `${targetName} 출장 최고급 VIP 프리미엄 방문 마사지 서비스. 쉼표 ${shortName}만의 차별화된 1:1 고품격 테라피를 경험해보세요.`,
+      h1Sub: '출장 VIP 방문 마사지',
+      heroSub: 'VIP 프리미엄 1:1 방문 테라피',
+      tagSuffix: '출장 VIP 마사지',
+    },
+    {
+      title: `${targetName} 출장 피로회복 딥티슈 집중 케어 마사지`,
+      desc: `${targetName} 출장 피로회복 딥티슈 테라피 마사지. 쉼표 ${shortName} 테라피스트가 깊은 속근육까지 꼼꼼하게 이완시켜 드립니다.`,
+      h1Sub: '출장 피로회복 딥티슈 마사지',
+      heroSub: '전신 피로회복 딥티슈 테라피',
+      tagSuffix: '출장 딥티슈 마사지',
+    },
+    {
+      title: `${targetName} 출장 프라이빗 에스테틱 홈스파 마사지`,
+      desc: `${targetName} 출장 홈스파 & 에스테틱 감성 마사지. 쉼표 ${shortName}과 함께 집이나 호텔에서 편안한 힐링을 누려보세요.`,
+      h1Sub: '출장 에스테틱 홈스파 마사지',
+      heroSub: '프라이빗 에스테틱 홈스파',
+      tagSuffix: '출장 홈스파 마사지',
+    },
+    {
+      title: `${targetName} 출장 상체 집중 릴렉스 테라피 마사지`,
+      desc: `${targetName} 출장 목, 어깨, 상체 집중 릴렉스 마사지. 쉼표 ${shortName}의 부드러운 케어로 굳은 상체 근육을 풀어드립니다.`,
+      h1Sub: '출장 상체 집중 릴렉스 마사지',
+      heroSub: '목·어깨·상체 집중 릴렉스 케어',
+      tagSuffix: '출장 상체집중 마사지',
+    },
+    {
+      title: `${targetName} 출장 건전 천연 아로마 힐링 마사지`,
+      desc: `${targetName} 출장 건전 지향 아로마 마사지. 쉼표 ${shortName} 최고급 천연 오일로 피부 보습과 심신 안정을 동시에 관리하세요.`,
+      h1Sub: '출장 건전 아로마 마사지',
+      heroSub: '안심 건전 천연 아로마 케어',
+      tagSuffix: '출장 아로마 마사지',
+    },
+    {
+      title: `${targetName} 출장 1:1 맞춤 컨디셔닝 바디 마사지`,
+      desc: `${targetName} 출장 체형 맞춤 컨디셔닝 바디 마사지. 쉼표 ${shortName}에서 개개인의 신체 밸런스에 맞춘 테라피를 제공합니다.`,
+      h1Sub: '출장 맞춤 컨디셔닝 마사지',
+      heroSub: '1:1 맞춤 바디 컨디셔닝 케어',
+      tagSuffix: '출장 컨디셔닝 마사지',
+    },
+    {
+      title: `${targetName} 출장 소프트 감성 스웨디시 힐링 마사지`,
+      desc: `${targetName} 출장 소프트 스웨디시 테라피 마사지. 쉼표 ${shortName}의 섬세한 터치감으로 하루의 누적된 스트레스를 날려보세요.`,
+      h1Sub: '출장 감성 스웨디시 마사지',
+      heroSub: '소프트 감성 스웨디시 케어',
+      tagSuffix: '출장 감성 마사지',
+    },
+    {
+      title: `${targetName} 출장 바디 밸런스 림프 순환 마사지`,
+      desc: `${targetName} 출장 전신 림프 순환 케어 마사지. 쉼표 ${shortName} 정성 가득한 방문 테라피로 흐트러진 바디 밸런스를 바로잡습니다.`,
+      h1Sub: '출장 바디 밸런스 마사지',
+      heroSub: '바디 밸런스 & 림프 순환 케어',
+      tagSuffix: '출장 밸런스 마사지',
+    },
+    {
+      title: `${targetName} 출장 프리미엄 홈타이 릴렉스 마사지`,
+      desc: `${targetName} 출장 24시 프리미엄 홈타이 힐링 마사지. 쉼표 ${shortName} 전 지역 깔끔하고 수준 높은 홈케어를 약속합니다.`,
+      h1Sub: '출장 프리미엄 홈타이 마사지',
+      heroSub: '프리미엄 홈타이 힐링 케어',
+      tagSuffix: '출장 타이 마사지',
+    },
+    {
+      title: `${targetName} 출장 웰니스 릴렉싱 바디 테라피 마사지`,
+      desc: `${targetName} 출장 웰니스 바디 케어 마사지 안내. 쉼표 ${shortName}에서 바쁜 일상 속 프라이빗한 재충전의 시간을 가져보세요.`,
+      h1Sub: '출장 웰니스 바디 마사지',
+      heroSub: '웰니스 릴렉싱 바디 케어',
+      tagSuffix: '출장 웰니스 마사지',
+    },
+    {
+      title: `${targetName} 출장 1:1 방문 활력 집중 케어 마사지`,
+      desc: `${targetName} 출장 활력 충전 1:1 집중 마사지. 쉼표 ${shortName} 테라피스트의 세심한 손길로 무거운 몸을 가볍게 만들어 드립니다.`,
+      h1Sub: '출장 1:1 활력 집중 마사지',
+      heroSub: '1:1 방문 활력 집중 케어',
+      tagSuffix: '출장 활력 마사지',
+    },
+  ];
+
+  let hash = 0;
+  for (let i = 0; i < slugSeed.length; i++) {
+    hash = (hash << 5) - hash + slugSeed.charCodeAt(i);
+    hash |= 0;
+  }
+  const index = Math.abs(hash) % templates.length;
+  return templates[index];
+}
+
+// 슬러그 경로로 지역 데이터를 탐색하는 헬퍼 함수
 function findRegionBySlug(slugs: string[]) {
   if (!slugs || slugs.length === 0) return null;
 
@@ -96,7 +296,7 @@ function findRegionBySlug(slugs: string[]) {
   };
 }
 
-// 2. 모든 동/구/시 경로 정적 페이지 사전 생성 (SSG)
+// 모든 동/구/시 경로 정적 페이지 사전 생성 (SSG)
 export async function generateStaticParams() {
   const paths: { slug: string[] }[] = [];
 
@@ -114,7 +314,7 @@ export async function generateStaticParams() {
   return paths;
 }
 
-// 3. 검색엔진 최적화(SEO) 및 네이버 Open Graph 메타데이터 생성
+// SEO 메타데이터 생성
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const result = findRegionBySlug(slug);
@@ -122,22 +322,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!result) return {};
 
   const { current } = result;
-  const targetName = current.fullName;
-  const shortName = current.name;
   const pageUrl = `https://comma26.netlify.app/areas/${slug.join('/')}/`;
-
-  const metaTitle = `${targetName} 출장마사지 24시 홈타이·스웨디시`;
-  const metaDescription = `${targetName} 전 지역 30분 내 빠른 도착! 쉼표 ${shortName} 출장마사지, 홈타이, 힐링 스웨디시 코스 및 100% 현장 후불 결제 안내입니다.`;
+  const tpl = getSeoTemplate(current.fullName, current.name, slug.join('/'));
 
   return {
-    title: metaTitle,
-    description: metaDescription,
+    title: tpl.title,
+    description: tpl.desc,
     keywords: [
-      `${targetName} 출장마사지`,
-      `${shortName} 출장마사지`,
-      `${shortName} 출장안마`,
-      `${shortName} 홈타이`,
-      `${shortName} 스웨디시`,
+      `${current.fullName} 출장 방문 마사지`,
+      `${current.fullName} 출장 홈케어 마사지`,
+      `${current.name} 출장 1:1 마사지`,
+      `${current.name} 출장 힐링 테라피`,
+      `${current.name} 스웨디시 홈케어`,
       '쉼표',
     ],
     alternates: {
@@ -148,13 +344,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       locale: 'ko_KR',
       url: pageUrl,
       siteName: '쉼표',
-      title: `${metaTitle} | 쉼표`,
-      description: metaDescription,
+      title: `${tpl.title} | 쉼표`,
+      description: tpl.desc,
     },
   };
 }
 
-// 4. 지역 페이지 본문 렌더링
+// 지역 페이지 본문 렌더링
 export default async function RegionPage({ params }: Props) {
   const { slug } = await params;
   const result = findRegionBySlug(slug);
@@ -165,16 +361,21 @@ export default async function RegionPage({ params }: Props) {
 
   const { current, breadcrumbs, children } = result;
   const isLeaf = !children || children.length === 0;
+  const slugSeed = slug.join('/');
+  const tpl = getSeoTemplate(current.fullName, current.name, slugSeed);
+
+  // 현재 지역에 맞는 업체 목록 가져오기
+  const targetShops = getShopsForRegion(slug);
 
   return (
     <main className="t4-directory-page">
-      {/* 1. 상단 메인 이미지 배너 */}
+      {/* 1. 상단 배너 */}
       <section className="custom-banner-section">
         <div className="page-width">
           <div className="custom-banner-link">
             <img
               src="/main-banner.jpg"
-              alt={`${current.fullName} 출장마사지 쉼표`}
+              alt={`${current.fullName} ${tpl.h1Sub} 쉼표`}
               className="custom-banner-img"
             />
           </div>
@@ -195,7 +396,7 @@ export default async function RegionPage({ params }: Props) {
           </nav>
 
           <p>REGION THERAPY GUIDE · COMMA</p>
-          <h1>{current.fullName} 출장마사지</h1>
+          <h1>{current.fullName} {tpl.h1Sub}</h1>
           <span>
             {current.fullName} 전 지역 30분 내 신속 방문 테라피 안내 · 100% 현장 후불 결제
           </span>
@@ -209,19 +410,19 @@ export default async function RegionPage({ params }: Props) {
       </header>
 
       <div className="page-width" style={{ padding: '40px 20px 60px' }}>
-        {/* 3. 추천 제휴 업체 5개 섹션 */}
+        {/* 3. 추천 제휴 업체 섹션 (지역별 분기된 업체 목록 렌더링) */}
         <section id="featured-shops" className="t4-directory-section" style={{ padding: '0 0 40px' }}>
           <div className="section-head-flex">
             <div>
               <span className="section-kicker">VERIFIED PREMIUM SHOPS</span>
-              <h2 className="section-title">{current.name} 추천 제휴점</h2>
-              <p className="section-subtitle">{current.fullName} 전 지역 신속 배차 가능한 고객 만족도 4.9점 이상 공식 인증점입니다.</p>
+              <h2 className="section-title">{current.name} 추천 제휴 테라피</h2>
+              <p className="section-subtitle">{current.fullName} 전 지역 신속 방문 가능한 고객 만족도 4.9점 이상 공식 인증점입니다.</p>
             </div>
-            <span className="badge-live-order">실시간 배차 가능</span>
+            <span className="badge-live-order">실시간 방문 가능</span>
           </div>
 
           <div className="shop-grid-enhanced">
-            {FEATURED_SHOPS.map((shop, index) => (
+            {targetShops.map((shop, index) => (
               <article key={shop.id} className="shop-card-v2">
                 <div className="shop-card-top">
                   <span className="shop-rank-badge">BEST {index + 1}</span>
@@ -254,36 +455,41 @@ export default async function RegionPage({ params }: Props) {
           </div>
         </section>
 
-        {/* 4. 하위 구/동 선택 그리드 (하위 지역이 있는 경우) */}
+        {/* 4. 하위 구/동 선택 그리드 */}
         {!isLeaf && (
           <section className="t4-directory-section" style={{ padding: '0 0 40px' }}>
             <div className="section-head-flex">
               <div>
                 <span className="section-kicker">SUB DISTRICTS</span>
-                <h2 className="section-title">{current.name} 세부 지역 안내</h2>
-                <p className="section-subtitle">원하시는 동·읍·면을 선택하시면 해당 지역 출장마사지 정보를 확인하실 수 있습니다.</p>
+                <h2 className="section-title">{current.name} 세부 동·구별 안내</h2>
+                <p className="section-subtitle">원하시는 지역을 선택하시면 해당 동 전용 상세 테라피 안내를 확인하실 수 있습니다.</p>
               </div>
             </div>
 
             <div className="region-grid-v2">
-              {children.map((child, idx) => (
-                <Link
-                  key={child.id}
-                  href={`/areas/${[...slug, child.id].join('/')}/`}
-                  className="region-card-v2"
-                >
-                  <div className="region-card-head">
-                    <span className="region-step-num">NO. {idx + 1}</span>
-                    <span className="region-count-badge">즉시 방문 가능</span>
-                  </div>
-                  <h3 className="region-card-title">{child.name} 출장마사지</h3>
-                  <p className="region-card-sub">{current.name} {child.name} 전 지역 20~30분 신속 배차</p>
-                  <div className="region-card-btn">
-                    <span>상세 안내 보기</span>
-                    <b>→</b>
-                  </div>
-                </Link>
-              ))}
+              {children.map((child, idx) => {
+                const childSeed = [...slug, child.id].join('/');
+                const childTpl = getSeoTemplate(`${current.name} ${child.name}`, child.name, childSeed);
+
+                return (
+                  <Link
+                    key={child.id}
+                    href={`/areas/${childSeed}/`}
+                    className="region-card-v2"
+                  >
+                    <div className="region-card-head">
+                      <span className="region-step-num">NO. {idx + 1}</span>
+                      <span className="region-count-badge">신속 방문 가능</span>
+                    </div>
+                    <h3 className="region-card-title">{child.name} {childTpl.tagSuffix}</h3>
+                    <p className="region-card-sub">{current.name} {child.name} 전 지역 20~30분 신속 방문 케어</p>
+                    <div className="region-card-btn">
+                      <span>상세 케어 안내 보기</span>
+                      <b>→</b>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </section>
         )}
@@ -292,8 +498,8 @@ export default async function RegionPage({ params }: Props) {
         {isLeaf && (
           <section className="safety-banner" style={{ marginBottom: '40px', background: '#fff', border: '1px solid #f2d5dc' }}>
             <div className="safety-text">
-              <h3>📍 {current.fullName} 전 지역 방문 서비스 운영 중</h3>
-              <p>{current.fullName} 내 아파트, 오피스텔, 원룸, 호텔, 모텔 등 어디서든 24시간 안심하고 이용하실 수 있습니다.</p>
+              <h3>📍 {current.fullName} 전 지역 1:1 방문 케어 운영 중</h3>
+              <p>{current.fullName} 내 아파트, 오피스텔, 원룸, 호텔 등 어디서든 24시간 안심하고 이용하실 수 있습니다.</p>
             </div>
             <Link href="/pricing" className="btn-primary" style={{ padding: '10px 20px', borderRadius: '8px' }}>
               코스별 가격 확인 →
@@ -307,7 +513,7 @@ export default async function RegionPage({ params }: Props) {
             <span className="section-kicker">SAFETY POLICY</span>
             <h3>선입금 없는 100% 현장 정산 안내</h3>
             <p>
-              쉼표는 일체의 예약금이나 유류비를 사전에 요구하지 않습니다. {current.name} 전 지역 관리사 도착 후 직접 확인하신 뒤 안전하게 결제해 주세요.
+              쉼표는 일체의 예약금이나 유류비를 사전에 요구하지 않습니다. {current.name} 전 지역 테라피스트 도착 후 직접 확인하신 뒤 안전하게 결제해 주세요.
             </p>
             <div className="contact-btn-row">
               <Link href="/pricing" className="btn-primary">
@@ -337,7 +543,7 @@ export default async function RegionPage({ params }: Props) {
               </li>
               <li>
                 <b>04</b>
-                <span>결제 방식 (현금 또는 카드)</span>
+                <span>결제 방식 (현금 또는 계좌이체/카드)</span>
               </li>
             </ol>
           </aside>
