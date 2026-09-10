@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { REGION_DATA, type RegionItem } from '../data/regions';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://comma26.netlify.app';
+  const baseUrl = 'https://comma365.netlify.app/p';
 
   // 1. 기본 정적 페이지 목록
   const staticRoutes: MetadataRoute.Sitemap = [

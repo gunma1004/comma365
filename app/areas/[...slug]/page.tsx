@@ -322,7 +322,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!result) return {};
 
   const { current } = result;
-  const pageUrl = `https://comma26.netlify.app/areas/${slug.join('/')}/`;
+  const pageUrl = `https://comma365.netlify.app/p/areas/${slug.join('/')}/`;
   const tpl = getSeoTemplate(current.fullName, current.name, slug.join('/'));
 
   return {

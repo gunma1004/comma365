@@ -31,62 +31,13 @@ function createRegionTree(
 }
 
 export const REGION_DATA: RegionItem[] = [
-  // 1. 서울특별시
+  // 1. 서울특별시 (25개 자치구 전체 반영)
   createRegionTree('seoul', '서울특별시', {
-    'gangnam': {
-      id: 'gangnam', name: '강남구',
+    'jongno': {
+      id: 'jongno', name: '종로구',
       dongs: [
-        { id: 'yeoksam', name: '역삼동' }, { id: 'nonhyeon', name: '논현동' }, { id: 'samsung', name: '삼성동' },
-        { id: 'cheongdam', name: '청담동' }, { id: 'daechi', name: '대치동' }, { id: 'sinsa', name: '신사동' },
-        { id: 'apgujeong', name: '압구정동' }, { id: 'dogok', name: '도곡동' }, { id: 'gaepo', name: '개포동' },
-        { id: 'segok', name: '세곡동' }, { id: 'irwon', name: '일원동' }, { id: 'suseo', name: '수서동' }
-      ]
-    },
-    'seocho': {
-      id: 'seocho', name: '서초구',
-      dongs: [
-        { id: 'seocho-dong', name: '서초동' }, { id: 'banpo', name: '반포동' }, { id: 'jamwon', name: '잠원동' },
-        { id: 'yangjae', name: '양재동' }, { id: 'bangbae', name: '방배동' }, { id: 'nae-gok', name: '내곡동' }
-      ]
-    },
-    'songpa': {
-      id: 'songpa', name: '송파구',
-      dongs: [
-        { id: 'jamsil', name: '잠실동' }, { id: 'sincheon', name: '신천동' }, { id: 'bangi', name: '방이동' },
-        { id: 'songpa-dong', name: '송파동' }, { id: 'seokchon', name: '석촌동' }, { id: 'samjeon', name: '삼전동' },
-        { id: 'garak', name: '가락동' }, { id: 'munjeong', name: '문정동' }, { id: 'jangji', name: '장지동' },
-        { id: 'ogum', name: '오금동' }, { id: 'geoyeo', name: '거여동' }, { id: 'macheon', name: '마천동' }
-      ]
-    },
-    'gangdong': {
-      id: 'gangdong', name: '강동구',
-      dongs: [
-        { id: 'cheonho', name: '천호동' }, { id: 'gildong', name: '길동' }, { id: 'dunchon', name: '둔촌동' },
-        { id: 'myeongil', name: '명일동' }, { id: 'godeok', name: '고덕동' }, { id: 'amasa', name: '암사동' },
-        { id: 'seongnae', name: '성내동' }, { id: 'gangil', name: '강일동' }, { id: 'sangil', name: '상일동' }
-      ]
-    },
-    'mapo': {
-      id: 'mapo', name: '마포구',
-      dongs: [
-        { id: 'seogyo', name: '서교동' }, { id: 'hapjeong', name: '합정동' }, { id: 'yeonnam', name: '연남동' },
-        { id: 'sangam', name: '상암동' }, { id: 'mangwon', name: '망원동' }, { id: 'gongdeok', name: '공덕동' },
-        { id: 'dohwa', name: '도화동' }, { id: 'ahyeon', name: '아현동' }, { id: 'seongsan', name: '성산동' }
-      ]
-    },
-    'yongsan': {
-      id: 'yongsan', name: '용산구',
-      dongs: [
-        { id: 'itaewon', name: '이태원동' }, { id: 'hannam', name: '한남동' }, { id: 'yongsan-dong', name: '용산동' },
-        { id: 'ichon', name: '이촌동' }, { id: 'huam', name: '후암동' }, { id: 'cheongpa', name: '청파동' },
-        { id: 'wonhyoro', name: '원효로동' }, { id: 'hangangro', name: '한강로동' }
-      ]
-    },
-    'yeongdeungpo': {
-      id: 'yeongdeungpo', name: '영등포구',
-      dongs: [
-        { id: 'yeouido', name: '여의도동' }, { id: 'yeongdeungpo-dong', name: '영등포동' }, { id: 'dangsan', name: '당산동' },
-        { id: 'mullae', name: '문래동' }, { id: 'yangpyeong', name: '양평동' }, { id: 'singil', name: '신길동' }, { id: 'daerim', name: '대림동' }
+        { id: 'jongno-dong', name: '종로동' }, { id: 'hyehwa', name: '혜화동' }, { id: 'pyeongchang', name: '평창동' },
+        { id: 'samcheong', name: '삼청동' }, { id: 'gahoe', name: '가회동' }, { id: 'changsin', name: '창신동' }
       ]
     },
     'jung-gu-seoul': {
@@ -96,18 +47,18 @@ export const REGION_DATA: RegionItem[] = [
         { id: 'sindang', name: '신당동' }, { id: 'hwanghak', name: '황학동' }, { id: 'jungnim', name: '중림동' }
       ]
     },
-    'jongno': {
-      id: 'jongno', name: '종로구',
+    'yongsan': {
+      id: 'yongsan', name: '용산구',
       dongs: [
-        { id: 'jongno-dong', name: '종로동' }, { id: 'hyehwa', name: '혜화동' }, { id: 'pyeongchang', name: '평창동' },
-        { id: 'samcheong', name: '삼청동' }, { id: 'gahoe', name: '가회동' }, { id: 'changsin', name: '창신동' }
+        { id: 'itaewon', name: '이태원동' }, { id: 'hannam', name: '한남동' }, { id: 'yongsan-dong', name: '용산동' },
+        { id: 'ichon', name: '이촌동' }, { id: 'huam', name: '후암동' }, { id: 'cheongpa', name: '청파동' }
       ]
     },
     'seongdong': {
       id: 'seongdong', name: '성동구',
       dongs: [
         { id: 'seongsu', name: '성수동' }, { id: 'wangsimni', name: '왕십리동' }, { id: 'oksu', name: '옥수동' },
-        { id: 'geumho', name: '금호동' }, { id: 'haengdang', name: '행당동' }, { id: 'majaang', name: '마장동' }
+        { id: 'geumho', name: '금호동' }, { id: 'haengdang', name: '행당동' }, { id: 'majang', name: '마장동' }
       ]
     },
     'gwangjin': {
@@ -135,7 +86,7 @@ export const REGION_DATA: RegionItem[] = [
       id: 'seongbuk', name: '성북구',
       dongs: [
         { id: 'seongbuk-dong', name: '성북동' }, { id: 'gireum', name: '길음동' }, { id: 'donam', name: '돈암동' },
-        { id: 'wolkok', name: '월곡동' }, { id: 'jangwi', name: '장위동' }, { id: 'jeongneung', name: '정릉동' }, { id: 'anam', name: '안암동' }
+        { id: 'wolkok', name: '월곡동' }, { id: 'jangwi', name: '장위동' }, { id: 'jeongneung', name: '정릉동' }
       ]
     },
     'gangbuk': {
@@ -161,7 +112,7 @@ export const REGION_DATA: RegionItem[] = [
       id: 'eunpyeong', name: '은평구',
       dongs: [
         { id: 'bulgwang', name: '불광동' }, { id: 'galhyeon', name: '갈현동' }, { id: 'nokbeon', name: '녹번동' },
-        { id: 'eungam', name: '응암동' }, { id: 'yeonsinnae', name: '대조동' }, { id: 'yeokchon', name: '역촌동' }, { id: 'susaek', name: '수색동' }
+        { id: 'eungam', name: '응암동' }, { id: 'yeokchon', name: '역촌동' }, { id: 'susaek', name: '수색동' }
       ]
     },
     'seodaemun': {
@@ -169,6 +120,13 @@ export const REGION_DATA: RegionItem[] = [
       dongs: [
         { id: 'sinchon', name: '신촌동' }, { id: 'yeonhui', name: '연희동' }, { id: 'hongje', name: '홍제동' },
         { id: 'hongun', name: '홍은동' }, { id: 'namgajwa', name: '남가좌동' }, { id: 'bukgajwa', name: '북가좌동' }
+      ]
+    },
+    'mapo': {
+      id: 'mapo', name: '마포구',
+      dongs: [
+        { id: 'seogyo', name: '서교동' }, { id: 'hapjeong', name: '합정동' }, { id: 'yeonnam', name: '연남동' },
+        { id: 'sangam', name: '상암동' }, { id: 'mangwon', name: '망원동' }, { id: 'gongdeok', name: '공덕동' }
       ]
     },
     'yangcheon': {
@@ -181,14 +139,14 @@ export const REGION_DATA: RegionItem[] = [
       id: 'gangseo', name: '강서구',
       dongs: [
         { id: 'hwagok', name: '화곡동' }, { id: 'magok', name: '마곡동' }, { id: 'balsan', name: '발산동' },
-        { id: 'deungchon', name: '등촌동' }, { id: 'gayang', name: '가양동' }, { id: 'banghwa', name: '방화동' }, { id: 'gonghang', name: '공항동' }
+        { id: 'deungchon', name: '등촌동' }, { id: 'gayang', name: '가양동' }, { id: 'banghwa', name: '방화동' }
       ]
     },
     'guro': {
       id: 'guro', name: '구로구',
       dongs: [
         { id: 'guro-dong', name: '구로동' }, { id: 'sindorim', name: '신도림동' }, { id: 'gaebong', name: '개봉동' },
-        { id: 'gocheok', name: '고척동' }, { id: 'oryu', name: '오류동' }, { id: 'hangdong', name: '항동' }
+        { id: 'gocheok', name: '고척동' }, { id: 'oryu', name: '오류동' }
       ]
     },
     'geumcheon': {
@@ -197,485 +155,232 @@ export const REGION_DATA: RegionItem[] = [
         { id: 'gasan', name: '가산동' }, { id: 'doksan', name: '독산동' }, { id: 'siheung', name: '시흥동' }
       ]
     },
+    'yeongdeungpo': {
+      id: 'yeongdeungpo', name: '영등포구',
+      dongs: [
+        { id: 'yeouido', name: '여의도동' }, { id: 'yeongdeungpo-dong', name: '영등포동' }, { id: 'dangsan', name: '당산동' },
+        { id: 'mullae', name: '문래동' }, { id: 'yangpyeong', name: '양평동' }, { id: 'singil', name: '신길동' }
+      ]
+    },
     'dongjak': {
       id: 'dongjak', name: '동작구',
       dongs: [
         { id: 'noryangjin', name: '노량진동' }, { id: 'sangdo', name: '상도동' }, { id: 'sadang', name: '사당동' },
-        { id: 'heukseok', name: '흑석동' }, { id: 'daebang', name: '대방동' }, { id: 'sindaebang', name: '신대방동' }
+        { id: 'heukseok', name: '흑석동' }, { id: 'daebang', name: '대방동' }
       ]
     },
     'gwanak': {
       id: 'gwanak', name: '관악구',
       dongs: [
-        { id: 'sillim', name: '신림동' }, { id: 'bongcheon', name: '봉천동' }, { id: 'nakseongdae', name: '낙성대동' },
-        { id: 'sillim-main', name: '서원동' }, { id: 'inheon', name: '인헌동' }, { id: 'daehak', name: '대학동' }
+        { id: 'sillim', name: '신림동' }, { id: 'bongcheon', name: '봉천동' }, { id: 'nakseongdae', name: '낙성대동' }
+      ]
+    },
+    'seocho': {
+      id: 'seocho', name: '서초구',
+      dongs: [
+        { id: 'seocho-dong', name: '서초동' }, { id: 'banpo', name: '반포동' }, { id: 'jamwon', name: '잠원동' },
+        { id: 'yangjae', name: '양재동' }, { id: 'bangbae', name: '방배동' }
+      ]
+    },
+    'gangnam': {
+      id: 'gangnam', name: '강남구',
+      dongs: [
+        { id: 'yeoksam', name: '역삼동' }, { id: 'nonhyeon', name: '논현동' }, { id: 'samsung', name: '삼성동' },
+        { id: 'cheongdam', name: '청담동' }, { id: 'daechi', name: '대치동' }, { id: 'sinsa', name: '신사동' }
+      ]
+    },
+    'songpa': {
+      id: 'songpa', name: '송파구',
+      dongs: [
+        { id: 'jamsil', name: '잠실동' }, { id: 'bangi', name: '방이동' }, { id: 'songpa-dong', name: '송파동' },
+        { id: 'seokchon', name: '석촌동' }, { id: 'garak', name: '가락동' }, { id: 'munjeong', name: '문정동' }
+      ]
+    },
+    'gangdong': {
+      id: 'gangdong', name: '강동구',
+      dongs: [
+        { id: 'cheonho', name: '천호동' }, { id: 'gildong', name: '길동' }, { id: 'myeongil', name: '명일동' },
+        { id: 'godeok', name: '고덕동' }, { id: 'amasa', name: '암사동' }, { id: 'seongnae', name: '성내동' }
       ]
     }
   }),
 
-  // 2. 인천광역시
+  // 2. 인천광역시 (제물포구, 영종구 및 요청하신 군/구 반영)
   createRegionTree('incheon', '인천광역시', {
-    'bupyeong': {
-      id: 'bupyeong', name: '부평구',
+    'jemulpo': {
+      id: 'jemulpo', name: '제물포구',
       dongs: [
-        { id: 'bupyeong-dong', name: '부평동' }, { id: 'samsan', name: '삼산동' }, { id: 'sangok', name: '산곡동' },
-        { id: 'cheongcheon', name: '청천동' }, { id: 'galsan', name: '갈산동' }, { id: 'bugae', name: '부개동' }, { id: 'sipjeong', name: '십정동' }
+        { id: 'sinpo', name: '신포동' }, { id: 'sungui', name: '숭의동' }, { id: 'manseok', name: '만석동' }
       ]
     },
-    'namdong': {
-      id: 'namdong', name: '남동구',
+    'yeongjong': {
+      id: 'yeongjong', name: '영종구',
       dongs: [
-        { id: 'guwol', name: '구월동' }, { id: 'ganseok', name: '간석동' }, { id: 'mansu', name: '만수동' },
-        { id: 'nonhyeon-incheon', name: '논현동' }, { id: 'seochang', name: '서창동' }, { id: 'nonhyeon-gojan', name: '고잔동' }
-      ]
-    },
-    'yeonsu': {
-      id: 'yeonsu', name: '연수구',
-      dongs: [
-        { id: 'songdo', name: '송도동' }, { id: 'yeonsu-dong', name: '연수동' }, { id: 'dongchun', name: '동춘동' },
-        { id: 'cheonghak', name: '청학동' }, { id: 'okryeon', name: '옥련동' }, { id: 'seonhak', name: '선학동' }
-      ]
-    },
-    'seo-gu-incheon': {
-      id: 'seo-gu-incheon', name: '서구',
-      dongs: [
-        { id: 'cheongna', name: '청라동' }, { id: 'geomdan', name: '검단동' }, { id: 'luwon', name: '가정동' },
-        { id: 'sim-gok', name: '심곡동' }, { id: 'yeenhui', name: '연희동' }, { id: 'wang-gil', name: '왕길동' }, { id: 'majeon', name: '마전동' }
+        { id: 'unseo', name: '운서동' }, { id: 'yeongjong-dong', name: '영종동' }, { id: 'jungsi', name: '중산동' }
       ]
     },
     'michuhol': {
       id: 'michuhol', name: '미추홀구',
       dongs: [
-        { id: 'juan', name: '주안동' }, { id: 'yonghyeon', name: '용현동' }, { id: 'dohwa-incheon', name: '도화동' },
-        { id: 'sungui', name: '숭의동' }, { id: 'hakik', name: '학익동' }, { id: 'gwangyo', name: '관교동' }
+        { id: 'juan', name: '주안동' }, { id: 'yonghyeon', name: '용현동' }, { id: 'hakik', name: '학익동' }
+      ]
+    },
+    'yeonsu': {
+      id: 'yeonsu', name: '연수구',
+      dongs: [
+        { id: 'songdo', name: '송도동' }, { id: 'yeonsu-dong', name: '연수동' }, { id: 'dongchun', name: '동춘동' }
+      ]
+    },
+    'namdong': {
+      id: 'namdong', name: '남동구',
+      dongs: [
+        { id: 'guwol', name: '구월동' }, { id: 'ganseok', name: '간석동' }, { id: 'mansu', name: '만수동' }
+      ]
+    },
+    'bupyeong': {
+      id: 'bupyeong', name: '부평구',
+      dongs: [
+        { id: 'bupyeong-dong', name: '부평동' }, { id: 'samsan', name: '삼산동' }, { id: 'sangok', name: '산곡동' }
       ]
     },
     'gyeyang': {
       id: 'gyeyang', name: '계양구',
       dongs: [
-        { id: 'gyesan', name: '계산동' }, { id: 'jakjeon', name: '작전동' }, { id: 'hyoseong', name: '효성동' }, { id: 'imhak', name: '임학동' }
+        { id: 'gyesan', name: '계산동' }, { id: 'jakjeon', name: '작전동' }, { id: 'hyoseong', name: '효성동' }
       ]
     },
-    'jung-gu-incheon': {
-      id: 'jung-gu-incheon', name: '중구',
+    'seo-gu-incheon': {
+      id: 'seo-gu-incheon', name: '서구',
       dongs: [
-        { id: 'yeongjong', name: '영종동' }, { id: 'unseo', name: '운서동' }, { id: 'jungsi', name: '중산동' }, { id: 'sinpo', name: '신포동' }
+        { id: 'cheongna', name: '청라동' }, { id: 'geomam', name: '검암동' }
+      ]
+    },
+    'geomdan': {
+      id: 'geomdan', name: '검단구',
+      dongs: [
+        { id: 'majeon', name: '마전동' }, { id: 'bullo', name: '불로동' }, { id: 'dangha', name: '당하동' }
+      ]
+    },
+    'ganghwa': {
+      id: 'ganghwa', name: '강화군',
+      dongs: [
+        { id: 'ganghwa-eup', name: '강화읍' }, { id: 'onam-gh', name: '선원면' }
+      ]
+    },
+    'ongjin': {
+      id: 'ongjin', name: '옹진군',
+      dongs: [
+        { id: 'bukdo', name: '북도면' }, { id: 'yeonpyeong', name: '연평면' }
       ]
     }
   }),
 
-  // 3. 경기도
+  // 3. 경기도 (수원, 성남, 고양, 용인, 부천, 안양, 안산의 구 단위 분할 및 전체 시·군 반영)
   createRegionTree('gyeonggi', '경기도', {
-    'suwon': {
-      id: 'suwon', name: '수원시',
-      dongs: [
-        { id: 'ingye', name: '인계동' }, { id: 'gwanggyo', name: '광교동' }, { id: 'yeongtong', name: '영통동' },
-        { id: 'maetan', name: '매탄동' }, { id: 'mangpo', name: '망포동' }, { id: 'jeongja-suwon', name: '정자동' },
-        { id: 'gwonseon', name: '권선동' }, { id: 'godeung', name: '고등동' }, { id: 'hwaso', name: '화서동' }
-      ]
-    },
-    'seongnam': {
-      id: 'seongnam', name: '성남시',
-      dongs: [
-        { id: 'bundang', name: '분당동' }, { id: 'pangyo', name: '판교동' }, { id: 'jeongja', name: '정자동' },
-        { id: 'seohyeon', name: '서현동' }, { id: 'yatap', name: '야탑동' }, { id: 'moran', name: '성남동' },
-        { id: 'wirye-seongnam', name: '위례동' }, { id: 'sunae', name: '수내동' }, { id: 'gumi-seongnam', name: '구미동' }
-      ]
-    },
-    'yongin': {
-      id: 'yongin', name: '용인시',
-      dongs: [
-        { id: 'suji', name: '풍덕천동' }, { id: 'jukjeon', name: '죽전동' }, { id: 'dongcheon', name: '동천동' },
-        { id: 'giheung', name: '기흥동' }, { id: 'gugal', name: '구갈동' }, { id: 'bojeong', name: '보정동' },
-        { id: 'cheoin', name: '역북동' }, { id: 'dongbaek', name: '동백동' }, { id: 'sanghyeon', name: '상현동' }
-      ]
-    },
-    'goyang': {
-      id: 'goyang', name: '고양시',
-      dongs: [
-        { id: 'ilsan', name: '일산동' }, { id: 'baekseok-goyang', name: '백석동' }, { id: 'madu', name: '마두동' },
-        { id: 'juyeop', name: '주엽동' }, { id: 'daehwa', name: '대화동' }, { id: 'hwajeong', name: '화정동' },
-        { id: 'haengsin', name: '행신동' }, { id: 'wondang', name: '성사동' }, { id: 'samsong', name: '삼송동' }
-      ]
-    },
-    'hwaseong': {
-      id: 'hwaseong', name: '화성시',
-      dongs: [
-        { id: 'dongtan-1', name: '동탄1동' }, { id: 'dongtan-2', name: '동탄2동' }, { id: 'byeongjeom', name: '병점동' },
-        { id: 'hyangnam', name: '향남읍' }, { id: 'bongdam', name: '봉담읍' }, { id: 'namyang', name: '남양읍' }, { id: 'songsan', name: '새솔동' }
-      ]
-    },
-    'bucheon': {
-      id: 'bucheon', name: '부천시',
-      dongs: [
-        { id: 'jungdong-bucheon', name: '중동' }, { id: 'sangdong-bucheon', name: '상동' }, { id: 'simgok', name: '심곡동' },
-        { id: 'sosabon', name: '소사본동' }, { id: 'goean', name: '괴안동' }, { id: 'wonjong', name: '원종동' }, { id: 'ogil', name: '옥길동' }
-      ]
-    },
-    'pyeongtaek': {
-      id: 'pyeongtaek', name: '평택시',
-      dongs: [
-        { id: 'godeok-pt', name: '고덕동' }, { id: 'bijeon', name: '비전동' }, { id: 'sejeong', name: '세교동' },
-        { id: 'songtan', name: '서정동' }, { id: 'ansejung', name: '안중읍' }, { id: 'poseung', name: '포승읍' }, { id: 'sosabeol', name: '동삭동' }
-      ]
-    },
-    'ansan': {
-      id: 'ansan', name: '안산시',
-      dongs: [
-        { id: 'gojan-ansan', name: '고잔동' }, { id: 'jungang-ansan', name: '중앙동' }, { id: 'seonbu', name: '선부동' },
-        { id: 'sangnoksu', name: '본오동' }, { id: 'sa-dong', name: '사동' }, { id: 'chogi', name: '초지동' }
-      ]
-    },
-    'anyang': {
-      id: 'anyang', name: '안양시',
-      dongs: [
-        { id: 'pyeongchon', name: '평촌동' }, { id: 'beomgye', name: '범계동' }, { id: 'anyang-dong', name: '안양동' },
-        { id: 'gwanyang', name: '관양동' }, { id: 'bisan', name: '비산동' }, { id: 'hogeo', name: '호계동' }
-      ]
-    },
-    'siheung': {
-      id: 'siheung', name: '시흥시',
-      dongs: [
-        { id: 'baegot', name: '배곧동' }, { id: 'jeongwang', name: '정왕동' }, { id: 'eungye', name: '은행동' },
-        { id: 'mokgam', name: '목감동' }, { id: 'janghyeon', name: '장현동' }, { id: 'daeya', name: '대야동' }
-      ]
-    },
-    'gimpo': {
-      id: 'gimpo', name: '김포시',
-      dongs: [
-        { id: 'gurae', name: '구래동' }, { id: 'masan', name: '마산동' }, { id: 'unyang', name: '운양동' },
-        { id: 'janggi', name: '장기동' }, { id: 'sau', name: '사우동' }, { id: 'pungmu', name: '풍무동' }, { id: 'gochon', name: '고촌읍' }
-      ]
-    },
-    'paju': {
-      id: 'paju', name: '파주시',
-      dongs: [
-        { id: 'unjeong', name: '운정동' }, { id: 'yadang', name: '야당동' }, { id: 'geumchon', name: '금촌동' },
-        { id: 'munsan', name: '문산읍' }, { id: 'gyoha', name: '교하동' }, { id: 'wollong', name: '월롱면' }
-      ]
-    },
-    'uijeongbu': {
-      id: 'uijeongbu', name: '의정부시',
-      dongs: [
-        { id: 'uijeongbu-dong', name: '의정부동' }, { id: 'howon', name: '호원동' }, { id: 'jangam', name: '장암동' },
-        { id: 'sin-gok', name: '신곡동' }, { id: 'minrak', name: '민락동' }, { id: 'gosan', name: '고산동' }
-      ]
-    },
-    'namyangju': {
-      id: 'namyangju', name: '남양주시',
-      dongs: [
-        { id: 'dasan', name: '다산동' }, { id: 'byeollae', name: '별내동' }, { id: 'pyeongnae', name: '평내동' },
-        { id: 'hopyeong', name: '호평동' }, { id: 'jinjeop', name: '진접읍' }, { id: 'wabu', name: '와부읍(덕소)' }, { id: 'onam', name: '오남읍' }
-      ]
-    },
-    'hanam': {
-      id: 'hanam', name: '하남시',
-      dongs: [
-        { id: 'misa', name: '미사동' }, { id: 'wirye-hanam', name: '위례동' }, { id: 'gam-il', name: '감일동' },
-        { id: 'deokpung', name: '덕풍동' }, { id: 'sinjang', name: '신장동' }, { id: 'pungwon', name: '풍산동' }
-      ]
-    }
-  }),
+    // 수원시 (4개 구)
+    'suwon-jangan': { id: 'suwon-jangan', name: '수원시 장안구', dongs: [{ id: 'paeng-suwon', name: '영화동' }, { id: 'song-suwon', name: '조원동' }] },
+    'suwon-gwonseon': { id: 'suwon-gwonseon', name: '수원시 권선구', dongs: [{ id: 'gwonseon-dong', name: '권선동' }, { id: 'gok-suwon', name: '곡반정동' }] },
+    'suwon-paldal': { id: 'suwon-paldal', name: '수원시 팔달구', dongs: [{ id: 'haenggung', name: '행궁동' }, { id: 'in-suwon', name: '인계동' }] },
+    'suwon-yeongtong': { id: 'suwon-yeongtong', name: '수원시 영통구', dongs: [{ id: 'yeongtong-dong', name: '영통동' }, { id: 'gwanggyo-dong', name: '광교동' }] },
 
-  // 4. 천안시
-  createRegionTree('cheonan', '천안시', {
-    'seobuk': {
-      id: 'seobuk', name: '서북구',
-      dongs: [
-        { id: 'dujeong', name: '두정동' }, { id: 'buldang', name: '불당동' }, { id: 'baekseok', name: '백석동' },
-        { id: 'seongjeong', name: '성정동' }, { id: 'ssangyong', name: '쌍용동' }, { id: 'jiksan', name: '직산읍' },
-        { id: 'seonghwan', name: '성환읍' }, { id: 'ipjang', name: '입장면' }, { id: 'chalandang', name: '차암동' }
-      ]
-    },
-    'dongnam': {
-      id: 'dongnam', name: '동남구',
-      dongs: [
-        { id: 'sinbu', name: '신부동' }, { id: 'cheongsu', name: '청수동' }, { id: 'cheongdang', name: '청당동' },
-        { id: 'bongmyeong-ca', name: '봉명동' }, { id: 'wonseong', name: '원성동' }, { id: 'sinbang', name: '신방동' },
-        { id: 'samryong', name: '삼룡동' }, { id: 'mokcheon', name: '목천읍' }, { id: 'anseo', name: '안서동' }
-      ]
-    }
-  }),
+    // 성남시 (3개 구)
+    'seongnam-sujeong': { id: 'seongnam-sujeong', name: '성남시 수정구', dongs: [{ id: 'sinheung-sn', name: '신흥동' }, { id: 'taepyeong-sn', name: '태평동' }] },
+    'seongnam-jungwon': { id: 'seongnam-jungwon', name: '성남시 중원구', dongs: [{ id: 'seongnam-dong', name: '성남동' }, { id: 'daewon', name: '대원동' }] },
+    'seongnam-bundang': { id: 'seongnam-bundang', name: '성남시 분당구', dongs: [{ id: 'seohyeon-dong', name: '서현동' }, { id: 'jeongja-dong', name: '정자동' }, { id: 'pangyo-dong', name: '판교동' }] },
 
-  // 5. 아산시
-  createRegionTree('asan', '아산시', {
-    'main': {
-      id: 'main', name: '아산전역',
-      dongs: [
-        { id: 'baebang', name: '배방읍' }, { id: 'tangjeong', name: '탕정면' }, { id: 'oncheon', name: '온천동' },
-        { id: 'yonghwa', name: '용화동' }, { id: 'monyeo', name: '모종동' }, { id: 'punggi', name: '풍기동' },
-        { id: 'dunpo', name: '둔포면' }, { id: 'sinchang', name: '신창면' }, { id: 'eumbong', name: '음봉면' },
-        { id: 'inju', name: '인주면' }, { id: 'dogo', name: '도고면' }, { id: 'yeombchi', name: '염치읍' }
-      ]
-    }
-  }),
+    // 의정부시
+    'uijeongbu': { id: 'uijeongbu', name: '의정부시', dongs: [{ id: 'uijeongbu-dong', name: '의정부동' }, { id: 'howon-dong', name: '호원동' }] },
 
-  // 6. 대전광역시
-  createRegionTree('daejeon', '대전광역시', {
-    'seo-gu-daejeon': {
-      id: 'seo-gu-daejeon', name: '서구',
-      dongs: [
-        { id: 'dunsan', name: '둔산동' }, { id: 'galma', name: '갈마동' }, { id: 'wolpyeong', name: '월평동' },
-        { id: 'tanbang', name: '탄방동' }, { id: 'goejeong', name: '괴정동' }, { id: 'mannyeon', name: '만년동' },
-        { id: 'gwanjeo', name: '관저동' }, { id: 'gasuwon', name: '가수원동' }, { id: 'doan-seo', name: '도안동' }
-      ]
-    },
-    'yuseong': {
-      id: 'yuseong', name: '유성구',
-      dongs: [
-        { id: 'bongmyeong', name: '봉명동' }, { id: 'gwanpyeong', name: '관평동' }, { id: 'jijok', name: '지족동' },
-        { id: 'noeun', name: '노은동' }, { id: 'banseok', name: '반석동' }, { id: 'jeonmin', name: '전민동' },
-        { id: 'sinsung', name: '신성동' }, { id: 'wonsinheung', name: '원신흥동' }, { id: 'dorong', name: '도룡동' }
-      ]
-    },
-    'jung-gu-daejeon': {
-      id: 'jung-gu-daejeon', name: '중구',
-      dongs: [
-        { id: 'eunhaeng', name: '은행동' }, { id: 'daeheung', name: '대흥동' }, { id: 'seonhwa', name: '선화동' },
-        { id: 'oryu', name: '오류동' }, { id: 'munhwa', name: '문화동' }, { id: 'yusa', name: '유천동' }, { id: 'taepyeong', name: '태평동' }
-      ]
-    },
-    'dong-gu-daejeon': {
-      id: 'dong-gu-daejeon', name: '동구',
-      dongs: [
-        { id: 'yongjeon', name: '용전동' }, { id: 'gaya', name: '가양동' }, { id: 'dae-dong', name: '대동' },
-        { id: 'jayang-dj', name: '자양동' }, { id: 'panam', name: '판암동' }, { id: 'hongdo', name: '홍도동' }
-      ]
-    },
-    'daedeok': {
-      id: 'daedeok', name: '대덕구',
-      dongs: [
-        { id: 'songchon', name: '송촌동' }, { id: 'birae', name: '비래동' }, { id: 'jungri', name: '중리동' },
-        { id: 'oen-dong', name: '오정동' }, { id: 'sintanjin', name: '신탄진동' }
-      ]
-    }
-  }),
+    // 안양시 (2개 구)
+    'anyang-manan': { id: 'anyang-manan', name: '안양시 만안구', dongs: [{ id: 'anyang-dong', name: '안양동' }, { id: 'seoksu-dong', name: '석수동' }] },
+    'anyang-dongan': { id: 'anyang-dongan', name: '안양시 동안구', dongs: [{ id: 'pyeongchon-dong', name: '평촌동' }, { id: 'beomgye-dong', name: '범계동' }] },
 
-  // 7. 대구광역시
-  createRegionTree('daegu', '대구광역시', {
-    'suseong': {
-      id: 'suseong', name: '수성구',
-      dongs: [
-        { id: 'beomeo', name: '범어동' }, { id: 'hwanggum', name: '황금동' }, { id: 'manchon', name: '만촌동' },
-        { id: 'susan', name: '수성동' }, { id: 'jisan', name: '지산동' }, { id: 'beommul', name: '범물동' },
-        { id: 'sinmae', name: '신매동' }, { id: 'siji', name: '시지동' }, { id: 'sang-dong', name: '상동' }, { id: 'dusan', name: '두산동' }
-      ]
-    },
-    'jung-gu-daegu': {
-      id: 'jung-gu-daegu', name: '중구',
-      dongs: [
-        { id: 'dongseongro', name: '동성로' }, { id: 'daebong', name: '대봉동' }, { id: 'namsan', name: '남산동' },
-        { id: 'samdeok', name: '삼덕동' }, { id: 'bongsan', name: '봉산동' }, { id: 'gwanduk', name: '교동' }
-      ]
-    },
-    'dong-gu-daegu': {
-      id: 'dong-gu-daegu', name: '동구',
-      dongs: [
-        { id: 'sincheon-dg', name: '신천동' }, { id: 'sinam', name: '신암동' }, { id: 'hyomok', name: '효목동' },
-        { id: 'yulha', name: '율하동' }, { id: 'bongmu', name: '이시아폴리스(봉무동)' }, { id: 'dongchon', name: '동촌동' }, { id: 'ansim', name: '안심동' }
-      ]
-    },
-    'seo-gu-daegu': {
-      id: 'seo-gu-daegu', name: '서구',
-      dongs: [
-        { id: 'naedang', name: '내당동' }, { id: 'bisan-dg', name: '비산동' }, { id: 'pyeongni', name: '평리동' }, { id: 'jungni', name: '중리동' }
-      ]
-    },
-    'nam-gu-daegu': {
-      id: 'nam-gu-daegu', name: '남구',
-      dongs: [
-        { id: 'daemyeong', name: '대명동' }, { id: 'ibong', name: '이천동' }, { id: 'bongdeok', name: '봉덕동' }
-      ]
-    },
-    'buk-gu-daegu': {
-      id: 'buk-gu-daegu', name: '북구',
-      dongs: [
-        { id: 'chilgok', name: '칠곡(동천동)' }, { id: 'taejeon', name: '태전동' }, { id: 'gumi-dg', name: '구암동' },
-        { id: 'sangyeok', name: '산격동' }, { id: 'bokhyeon', name: '복현동' }, { id: 'chimsan', name: '침산동' }, { id: 'geonam', name: '고성동' }
-      ]
-    },
-    'dalseo': {
-      id: 'dalseo', name: '달서구',
-      dongs: [
-        { id: 'sangin', name: '상인동' }, { id: 'wolseong', name: '월성동' }, { id: 'jincheon', name: '진천동' },
-        { id: 'bolli', name: '본리동' }, { id: 'gamsam', name: '감삼동' }, { id: 'duyu', name: '두류동' },
-        { id: 'yongsan-dg', name: '용산동' }, { id: 'igok', name: '이곡동' }, { id: 'daegok', name: '대곡동' }
-      ]
-    },
-    'dalseong': {
-      id: 'dalseong', name: '달성군',
-      dongs: [
-        { id: 'dasa', name: '다사읍' }, { id: 'hwawon', name: '화원읍' }, { id: 'hyeonpung', name: '현풍읍' },
-        { id: 'yuga', name: '유가읍' }, { id: 'okpo', name: '옥포읍' }, { id: 'gubi', name: '구지면' }
-      ]
-    }
-  }),
+    // 부천시 (3개 구)
+    'bucheon-wonmi': { id: 'bucheon-wonmi', name: '부천시 원미구', dongs: [{ id: 'simgok-bc', name: '심곡동' }, { id: 'jung-bc', name: '중동' }] },
+    'bucheon-sosa': { id: 'bucheon-sosa', name: '부천시 소사구', dongs: [{ id: 'sosabon-dong', name: '소사본동' }, { id: 'yeokgok-bc', name: '역곡동' }] },
+    'bucheon-ojeong': { id: 'bucheon-ojeong', name: '부천시 오정구', dongs: [{ id: 'ogjeong-dong', name: '오정동' }, { id: 'wonjong-dong', name: '원종동' }] },
 
-  // 8. 구미시
-  createRegionTree('gumi', '구미시', {
-    'main': {
-      id: 'main', name: '구미전역',
-      dongs: [
-        { id: 'indong', name: '인동' }, { id: 'jinpyeong', name: '진평동' }, { id: 'wonpyeong', name: '원평동' },
-        { id: 'songjeong-gm', name: '송정동' }, { id: 'hyeonggok', name: '형곡동' }, { id: 'okgye', name: '옥계동' },
-        { id: 'sandong', name: '산동읍' }, { id: 'gupo', name: '구포동' }, { id: 'hyeongeung', name: '황상동' },
-        { id: 'sangmo', name: '상모동' }, { id: 'sagok', name: '사곡동' }, { id: 'sinpyeong-gm', name: '신평동' },
-        { id: 'bisan-gm', name: '비산동' }, { id: 'gwangpyeong', name: '광평동' }, { id: 'bonggok', name: '봉곡동' },
-        { id: 'doran', name: '도량동' }, { id: 'seonju', name: '선주원남동' }, { id: 'goa', name: '고아읍' }
-      ]
-    }
-  }),
+    // 광명시
+    'gwangmyeong': { id: 'gwangmyeong', name: '광명시', dongs: [{ id: 'gwangmyeong-dong', name: '광명동' }, { id: 'cheolsan-dong', name: '철산동' }] },
 
-  // 9. 포항시
-  createRegionTree('pohang', '포항시', {
-    'buk-gu-pohang': {
-      id: 'buk-gu-pohang', name: '북구',
-      dongs: [
-        { id: 'jukdo', name: '죽도동' }, { id: 'duho', name: '두호동' }, { id: 'jangseong', name: '장성동' },
-        { id: 'yangdeok', name: '양덕동' }, { id: 'hwanho', name: '환호동' }, { id: 'changpo', name: '창포동' },
-        { id: 'heunghae', name: '흥해읍' }, { id: 'chogok', name: '초곡지구' }, { id: 'yongheung', name: '용흥동' }, { id: 'uhyeon', name: '우현동' }
-      ]
-    },
-    'nam-gu-pohang': {
-      id: 'nam-gu-pohang', name: '남구',
-      dongs: [
-        { id: 'idaedong', name: '이동' }, { id: 'hyoja', name: '효자동' }, { id: 'daeam', name: '대이동' },
-        { id: 'sangdo', name: '상도동' }, { id: 'haedo', name: '해도동' }, { id: 'songdo-ph', name: '송도동' },
-        { id: 'yeonil', name: '연일읍' }, { id: 'ocheon', name: '오천읍' }, { id: 'donghae', name: '동해면' }, { id: 'jihaeng', name: '지곡동' }
-      ]
-    }
-  }),
+    // 평택시
+    'pyeongtaek': { id: 'pyeongtaek', name: '평택시', dongs: [{ id: 'bijeon-dong', name: '비전동' }, { id: 'godeok-dong', name: '고덕동' }] },
 
-  // 10. 부산광역시
-  createRegionTree('busan', '부산광역시', {
-    'haeundae': {
-      id: 'haeundae', name: '해운대구',
-      dongs: [
-        { id: 'udong', name: '우동(마린시티/센텀)' }, { id: 'jungdong-bs', name: '중동' }, { id: 'jwa-dong', name: '좌동(신시가지)' },
-        { id: 'songjeong-bs', name: '송정동' }, { id: 'jaesong', name: '재송동' }, { id: 'banyeo', name: '반여동' }, { id: 'bansong', name: '반송동' }
-      ]
-    },
-    'busanjin': {
-      id: 'busanjin', name: '부산진구',
-      dongs: [
-        { id: 'seomyeon', name: '서면(부전동)' }, { id: 'bujeon', name: '부전동' }, { id: 'jeonpo', name: '전포동' },
-        { id: 'yangjeong', name: '양정동' }, { id: 'kaya', name: '가야동' }, { id: 'gaegeum', name: '개금동' },
-        { id: 'danggam', name: '당감동' }, { id: 'buam', name: '부암동' }, { id: 'choeup', name: '초읍동' }
-      ]
-    },
-    'suyeong': {
-      id: 'suyeong', name: '수영구',
-      dongs: [
-        { id: 'gwangan', name: '광안동' }, { id: 'millak', name: '민락동' }, { id: 'namcheon', name: '남천동' },
-        { id: 'suyeong-dong', name: '수영동' }, { id: 'mangmi', name: '망미동' }
-      ]
-    },
-    'nam-gu-busan': {
-      id: 'nam-gu-busan', name: '남구',
-      dongs: [
-        { id: 'daeyeon', name: '대연동' }, { id: 'yongho', name: '용호동' }, { id: 'munhyeon', name: '문현동' },
-        { id: 'gamman', name: '감만동' }, { id: 'woam', name: '우암동' }, { id: 'yongdang', name: '용당동' }
-      ]
-    },
-    'dongnae': {
-      id: 'dongnae', name: '동래구',
-      dongs: [
-        { id: 'myeongnyun', name: '명륜동' }, { id: 'oncheon-bs', name: '온천동' }, { id: 'sajik', name: '사직동' },
-        { id: 'allak', name: '안락동' }, { id: 'myeongjang', name: '명장동' }, { id: 'sulan', name: '수안동' }
-      ]
-    },
-    'geumjeong': {
-      id: 'geumjeong', name: '금정구',
-      dongs: [
-        { id: 'jangjeon', name: '장전동(부산대)' }, { id: 'guseo', name: '구서동' }, { id: 'namsan-bs', name: '남산동' },
-        { id: 'bugok', name: '부곡동' }, { id: 'cheongryong', name: '청룡동' }, { id: 'seodong', name: '서동' }
-      ]
-    },
-    'yeonje': {
-      id: 'yeonje', name: '연제구',
-      dongs: [
-        { id: 'yeonsan', name: '연산동' }, { id: 'geoje', name: '거제동' }
-      ]
-    },
-    'gangseo-busan': {
-      id: 'gangseo-busan', name: '강서구',
-      dongs: [
-        { id: 'myeongji', name: '명지국제신도시' }, { id: 'sinho', name: '신호동' }, { id: 'jiang', name: '지사동' },
-        { id: 'daejeo', name: '대저동' }, { id: 'noksan', name: '녹산동' }, { id: 'gangdong-bs', name: '강동동' }
-      ]
-    },
-    'sasang': {
-      id: 'sasang', name: '사상구',
-      dongs: [
-        { id: 'gwaebeop', name: '괘법동(사상역)' }, { id: 'gamjeon', name: '감전동' }, { id: 'jurye', name: '주례동' },
-        { id: 'haksang', name: '학장동' }, { id: 'eomgung', name: '엄궁동' }, { id: 'mora', name: '모라동' }, { id: 'deokpo', name: '덕포동' }
-      ]
-    },
-    'saha': {
-      id: 'saha', name: '사하구',
-      dongs: [
-        { id: 'hadan', name: '하단동' }, { id: 'dangni', name: '당리동' }, { id: 'goejeong-bs', name: '괴정동' },
-        { id: 'dadae', name: '다대포(다대동)' }, { id: 'jangrim', name: '장림동' }, { id: 'sinpyeong-bs', name: '신평동' }
-      ]
-    },
-    'jung-gu-busan': {
-      id: 'jung-gu-busan', name: '중구',
-      dongs: [
-        { id: 'nampo', name: '남포동' }, { id: 'gwangbok', name: '광복동' }, { id: 'jungang-bs', name: '중앙동' }, { id: 'bosu', name: '보수동' }
-      ]
-    },
-    'seo-gu-busan': {
-      id: 'seo-gu-busan', name: '서구',
-      dongs: [
-        { id: 'songdo-beach', name: '암남동(송도)' }, { id: 'chobang', name: '충무동' }, { id: 'dongdaesin', name: '동대신동' }, { id: 'seodaesin', name: '서대신동' }
-      ]
-    },
-    'dong-gu-busan': {
-      id: 'dong-gu-busan', name: '동구',
-      dongs: [
-        { id: 'choryang', name: '초량동(부산역)' }, { id: 'sujeong', name: '수정동' }, { id: 'jwacheon', name: '좌천동' }, { id: 'beomil', name: '범일동' }
-      ]
-    },
-    'buk-gu-busan': {
-      id: 'buk-gu-busan', name: '북구',
-      dongs: [
-        { id: 'deokcheon', name: '덕천동' }, { id: 'hwamyeong', name: '화명동' }, { id: 'mandeok', name: '만덕동' }, { id: 'gupo-bs', name: '구포동' }
-      ]
-    },
-    'yeongdo': {
-      id: 'yeongdo', name: '영도구',
-      dongs: [
-        { id: 'bongnae', name: '봉래동' }, { id: 'namhang', name: '남항동' }, { id: 'yeongseon', name: '영선동' }, { id: 'dongsam', name: '동삼동' }
-      ]
-    },
-    'gijang': {
-      id: 'gijang', name: '기장군',
-      dongs: [
-        { id: 'jeonggwan', name: '정관읍' }, { id: 'gijang-eup', name: '기장읍' }, { id: 'ilan', name: '일광읍' }, { id: 'jangan', name: '장안읍' }
-      ]
-    }
-  }),
+    // 동두천시
+    'dongducheon': { id: 'dongducheon', name: '동두천시', dongs: [{ id: 'haenghwa', name: '생연동' }, { id: 'bosan-dong', name: '보산동' }] },
 
-  // 11. 제주특별자치도
-  createRegionTree('jeju', '제주특별자치도', {
-    'jeju-si': {
-      id: 'jeju-si', name: '제주시',
-      dongs: [
-        { id: 'yeon-dong', name: '연동(신제주)' }, { id: 'nohyeong', name: '노형동' }, { id: 'ara', name: '아라동' },
-        { id: 'ido', name: '이도동' }, { id: 'samdo', name: '삼도동' }, { id: 'ildo', name: '일도동' },
-        { id: 'yongdam', name: '용담동' }, { id: 'geonip', name: '건입동' }, { id: 'hwayang-jj', name: '화북동' },
-        { id: 'samyang', name: '삼양동' }, { id: 'ora', name: '오라동' }, { id: 'oedobon', name: '외도동' },
-        { id: 'aewol', name: '애월읍' }, { id: 'hallim', name: '한림읍' }, { id: 'jocheon', name: '조천읍' },
-        { id: 'guwa', name: '구좌읍' }, { id: 'hangyeong', name: '한경면' }
-      ]
-    },
-    'seogwipo-si': {
-      id: 'seogwipo-si', name: '서귀포시',
-      dongs: [
-        { id: 'seogwi', name: '서귀동' }, { id: 'donghong', name: '동홍동' }, { id: 'seohong', name: '서홍동' },
-        { id: 'jungmun', name: '중문동' }, { id: 'daeryun', name: '대륜동' }, { id: 'daejeong', name: '대정읍(영어도시)' },
-        { id: 'namwon', name: '남원읍' }, { id: 'seongsan', name: '성산읍' }, { id: 'andeok', name: '안덕면' }, { id: 'pyoseon', name: '표선면' }
-      ]
-    }
+    // 안산시 (2개 구)
+    'ansan-sangnok': { id: 'ansan-sangnok', name: '안산시 상록구', dongs: [{ id: 'bono-dong', name: '본오동' }, { id: '사동-as', name: '사동' }] },
+    'ansan-danwon': { id: 'ansan-danwon', name: '안산시 단원구', dongs: [{ id: 'gojan-dong', name: '고잔동' }, { id: 'wongok-dong', name: '원곡동' }] },
+
+    // 고양시 (3개 구)
+    'goyang-deokyang': { id: 'goyang-deokyang', name: '고양시 덕양구', dongs: [{ id: 'hwajeong-dong', name: '화정동' }, { id: 'samsong-dong', name: '삼송동' }] },
+    'goyang-ilsandong': { id: 'goyang-ilsandong', name: '고양시 일산동구', dongs: [{ id: 'baekseok-dong', name: '백석동' }, { id: 'madu-dong', name: '마두동' }] },
+    'goyang-ilsanseo': { id: 'goyang-ilsanseo', name: '고양시 일산서구', dongs: [{ id: 'juyeop-dong', name: '주엽동' }, { id: 'daehwa-dong', name: '대화동' }] },
+
+    // 과천시
+    'gwacheon': { id: 'gwacheon', name: '과천시', dongs: [{ id: 'gwacheon-dong', name: '과천동' }, { id: 'jungang-gc', name: '중앙동' }] },
+
+    // 구리시
+    'guri': { id: 'guri', name: '구리시', dongs: [{ id: 'insang-dong', name: '인창동' }, { id: 'tosel-dong', name: '토평동' }] },
+
+    // 남양주시
+    'namyangju': { id: 'namyangju', name: '남양주시', dongs: [{ id: 'dasan-dong', name: '다산동' }, { id: 'byeollae-dong', name: '별내동' }] },
+
+    // 오산시
+    'osan': { id: 'osan', name: '오산시', dongs: [{ id: 'osandong', name: '오산동' }, { id: 'seongho-dong', name: '원동' }] },
+
+    // 시흥시
+    'siheung': { id: 'siheung', name: '시흥시', dongs: [{ id: 'baegot-dong', name: '배곧동' }, { id: 'jeongwang-dong', name: '정왕동' }] },
+
+    // 군포시
+    'gunpo': { id: 'gunpo', name: '군포시', dongs: [{ id: 'sanhon-dong', name: '산본동' }, { id: 'geumjeong-dong', name: '금정동' }] },
+
+    // 의왕시
+    'uiwang': { id: 'uiwang', name: '의왕시', dongs: [{ id: 'oen-dong', name: '오전동' }, { id: 'naeson-dong', name: '내손동' }] },
+
+    // 하남시
+    'hanam': { id: 'hanam', name: '하남시', dongs: [{ id: 'misa-dong', name: '미사동' }, { id: 'deokpung-dong', name: '덕풍동' }] },
+
+    // 용인시 (3개 구)
+    'yongin-cheoin': { id: 'yongin-cheoin', name: '용인시 처인구', dongs: [{ id: 'yeokbuk-dong', name: '역북동' }, { id: 'kimnyang', name: '김량장동' }] },
+    'yongin-giheung': { id: 'yongin-giheung', name: '용인시 기흥구', dongs: [{ id: 'gugal-dong', name: '구갈동' }, { id: 'bojeong-dong', name: '보정동' }] },
+    'yongin-suji': { id: 'yongin-suji', name: '용인시 수지구', dongs: [{ id: 'pungdeokcheon', name: '풍덕천동' }, { id: 'jukjeon-dong', name: '죽전동' }] },
+
+    // 파주시
+    'paju': { id: 'paju', name: '파주시', dongs: [{ id: 'unjeong-dong', name: '운정동' }, { id: 'geumchon-dong', name: '금촌동' }] },
+
+    // 이천시
+    'icheon': { id: 'icheon', name: '이천시', dongs: [{ id: 'changjeon-dong', name: '창전동' }, { id: '증포동', name: '증포동' }] },
+
+    // 안성시
+    'anseong': { id: 'anseong', name: '안성시', dongs: [{ id: 'gongdo-eup', name: '공도읍' }, { id: 'anseong-dong', name: '당왕동' }] },
+
+    // 김포시
+    'gimpo': { id: 'gimpo', name: '김포시', dongs: [{ id: 'gurae-dong', name: '구래동' }, { id: 'janggi-dong', name: '장기동' }] },
+
+    // 화성시
+    'hwaseong': { id: 'hwaseong', name: '화성시', dongs: [{ id: 'dongtan-1', name: '동탄1동' }, { id: 'dongtan-2', name: '동탄2동' }] },
+
+    // 광주시
+    'gwangju-gg': { id: 'gwangju-gg', name: '광주시', dongs: [{ id: 'yeok-dong', name: '역동' }, { id: 'taejeon-dong', name: '태전동' }] },
+
+    // 양주시
+    'yangju': { id: 'yangju', name: '양주시', dongs: [{ id: 'okjeong-dong', name: '옥정동' }, { id: 'hocheon-dong', name: '회천동' }] },
+
+    // 포천시
+    'pocheon': { id: 'pocheon', name: '포천시', dongs: [{ id: 'pocheon-dong', name: '포천동' }, { id: 'sonwoo', name: '소흘읍' }] },
+
+    // 여주시
+    'yeoju': { id: 'yeoju', name: '여주시', dongs: [{ id: 'yeoju-dong', name: '하동' }, { id: 'ohak', name: '오학동' }] },
+
+    // 연천군
+    'yeoncheon': { id: 'yeoncheon', name: '연천군', dongs: [{ id: 'yeoncheon-eup', name: '연천읍' }, { id: 'jeongok', name: '전곡읍' }] },
+
+    // 가평군
+    'gapyeong': { id: 'gapyeong', name: '가평군', dongs: [{ id: 'gapyeong-eup', name: '가평읍' }, { id: 'cheongpyeong', name: '청평면' }] },
+
+    // 양평군
+    'yangpyeong-gun': { id: 'yangpyeong-gun', name: '양평군', dongs: [{ id: 'yangpyeong-eup', name: '양평읍' }, { id: 'yongmun', name: '용문면' }] }
   })
 ];

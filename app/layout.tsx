@@ -7,7 +7,7 @@ const siteDescription =
   '100% 현장 후불제! 서울·경기·인천·대전·부산 등 전국 24시 신속 방문 1:1 프라이빗 바디 테라피.';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://comma26.netlify.app'),
+  metadataBase: new URL('https://comma365.netlify.app/p'),
   title: {
     template: '%s | 쉼표',
     default: siteTitle,
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
-    url: 'https://comma26.netlify.app/',
+    url: 'https://comma365.netlify.app/p/',
     siteName: '쉼표',
     title: siteTitle,
     description: siteDescription,

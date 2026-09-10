@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://comma26.netlify.app/sitemap.xml',
+    sitemap: 'https://comma365.netlify.app/p/sitemap.xml',
   };
 }
