@@ -77,6 +77,20 @@ const DAEJEON_SHOPS = [
   },
 ];
 
+// 천안/아산 전용 업체
+const CHEOST_SHOPS = [
+  {
+    id: 151,
+    name: '천안아산홈테라피',
+    phone: '0507-1280-3355',
+    tag: '24시 맞춤 홈케어 · 스웨디시',
+    desc: '천안 및 아산 전 지역 30분 내 신속 방문 힐링 케어',
+    rating: '4.9',
+    reviews: 112,
+    highlight: '천안아산 공식 제휴',
+  },
+];
+
 // 대구/구미/포항/부산/제주 전용 제휴문의 업체
 const AFFILIATE_INQUIRY_SHOPS = [
   {
@@ -95,22 +109,15 @@ const AFFILIATE_INQUIRY_SHOPS = [
 function getShopsForRegion(slugs: string[]) {
   const rootSlug = slugs[0];
 
-  // 1. 대전 권역
   if (rootSlug === 'daejeon') {
     return DAEJEON_SHOPS;
   }
-
-  // 2. 천안, 아산 권역 (기본 업체 또는 전용 업체 매칭)
   if (rootSlug === 'cheonan' || rootSlug === 'asan') {
-    return DEFAULT_SHOPS; // 혹은 원하시는 전용 업체 배열로 변경 가능
+    return CHEOST_SHOPS;
   }
-
-  // 3. 대구, 구미, 포항, 부산, 제주 권역 (제휴문의 업체)
   if (['daegu', 'gumi', 'pohang', 'busan', 'jeju'].includes(rootSlug)) {
     return AFFILIATE_INQUIRY_SHOPS;
   }
-
-  // 4. 그 외 기본 수도권 등 지역
   return DEFAULT_SHOPS;
 }
 
@@ -369,8 +376,9 @@ export default async function RegionPage({ params }: Props) {
   const slugSeed = slug.join('/');
   const tpl = getSeoTemplate(current.fullName, current.name, slugSeed);
 
-  // 현재 지역에 맞는 업체 목록 가져오기
-  const targetShops = getShopsForRegion(slug);
+  // 현재 지역에 맞는 업체 목록 가져온 후 새로고침 시 랜덤으로 순서 섞기
+  const rawShops = getShopsForRegion(slug);
+  const targetShops = [...rawShops].sort(() => Math.random() - 0.5);
 
   return (
     <main className="t4-directory-page">
@@ -415,7 +423,7 @@ export default async function RegionPage({ params }: Props) {
       </header>
 
       <div className="page-width" style={{ padding: '40px 20px 60px' }}>
-        {/* 3. 추천 제휴 업체 섹션 (지역별 분기된 업체 목록 렌더링) */}
+        {/* 3. 추천 제휴 업체 섹션 (랜덤 셔플된 업체 목록 렌더링) */}
         <section id="featured-shops" className="t4-directory-section" style={{ padding: '0 0 40px' }}>
           <div className="section-head-flex">
             <div>
