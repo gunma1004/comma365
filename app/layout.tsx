@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description: siteDescription,
   verification: {
     other: {
-      'naver-site-verification': '4bf40448775a7cfa672b627330c0ff56f2b95f36',
+     'naver-site-verification': 'f9326643a0d35edbb291dd077451e4312ef9a344',
     },
   },
   openGraph: {
