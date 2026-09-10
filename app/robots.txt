@@ -1,3 +1,4 @@
+// app/robots.ts
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
@@ -6,6 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://comma365.netlify.app/p/sitemap.xml',
+    // /p/를 제거하여 올바른 루트 경로로 지정합니다.
+    sitemap: 'https://comma365.netlify.app/sitemap.xml', 
   };
 }
