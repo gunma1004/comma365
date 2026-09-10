@@ -82,9 +82,12 @@ const REGIONS = [
 ];
 
 export default function HomePage() {
-  const [shops, setShops] = useState<Shop[]>(INITIAL_SHOPS);
+  // 처음에는 빈 배열로 두어 서버/클라이언트 불일치(Hydration Error) 방지
+  const [shops, setShops] = useState<Shop[]>([]);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     const shuffled = [...INITIAL_SHOPS];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -92,6 +95,9 @@ export default function HomePage() {
     }
     setShops(shuffled);
   }, []);
+
+  // 마운트 되기 전에는 기본 순서를 보여주어 화면 깜빡임이나 에러 방지
+  const displayShops = isMounted && shops.length > 0 ? shops : INITIAL_SHOPS;
 
   return (
     <main className="t4-main-container">
@@ -108,7 +114,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. 상단 추천 제휴 업체 (5개) */}
+      {/* 2. 상단 추천 제휴 업체 (5개) - 새로고침 시 랜덤 셔플 */}
       <section id="featured-shops" className="page-width t4-directory-section">
         <div className="section-head-flex">
           <div>
@@ -120,7 +126,7 @@ export default function HomePage() {
         </div>
 
         <div className="shop-grid-enhanced">
-          {shops.map((shop, index) => (
+          {displayShops.map((shop, index) => (
             <article key={shop.id} className="shop-card-v2">
               <div className="shop-card-top">
                 <span className="shop-rank-badge">BEST {index + 1}</span>
