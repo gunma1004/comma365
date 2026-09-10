@@ -100,12 +100,17 @@ function getShopsForRegion(slugs: string[]) {
     return DAEJEON_SHOPS;
   }
 
-  // 2. 대구, 구미, 포항, 부산, 제주 권역
+  // 2. 천안, 아산 권역 (기본 업체 또는 전용 업체 매칭)
+  if (rootSlug === 'cheonan' || rootSlug === 'asan') {
+    return DEFAULT_SHOPS; // 혹은 원하시는 전용 업체 배열로 변경 가능
+  }
+
+  // 3. 대구, 구미, 포항, 부산, 제주 권역 (제휴문의 업체)
   if (['daegu', 'gumi', 'pohang', 'busan', 'jeju'].includes(rootSlug)) {
     return AFFILIATE_INQUIRY_SHOPS;
   }
 
-  // 3. 그 외 기본 수도권 등 지역
+  // 4. 그 외 기본 수도권 등 지역
   return DEFAULT_SHOPS;
 }
 
